@@ -1,19 +1,20 @@
 import { createApp } from "vue";
-import { createPinia } from "pinia";
-
 import App from "./App.vue";
 import router from "./router";
-
-import "./assets/main.css";
+import vuetify from "./plugins/vuetify";
+import { loadFonts } from "./plugins/webfontloader";
+import { createPinia } from "pinia";
 
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8080/api";
 
-const app = createApp(App);
+loadFonts();
 
-app.use(createPinia());
-app.use(router);
+createApp(App)
+  .use(router)
+  .use(createPinia())
+  .use(vuetify)
 
-app.mount("#app");
+  .mount("#app");
