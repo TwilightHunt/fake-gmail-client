@@ -1,24 +1,31 @@
-import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import axios from "axios";
+import { AuthApi } from "../api/auth";
+import { DefaultApiInstanse } from "../api";
 
 export const useUserStore = defineStore({
   id: "user",
   state: () => ({
     user: {},
+    credentials: {
+      accessToken: localStorage.getItem("access_token") || null,
+    },
   }),
   actions: {
-    async login(data) {
+    async login(email, password) {
       try {
-        const user = await axios.post("/login", data);
-        this.user = user.data;
+        const data = { email, password };
+
+        AuthApi.login(data).then((res) => {
+          console.log(res);
+          this.user = res.data.user;
+          this.credentials.accessToken = res.data.accessToken;
+          DefaultApiInstanse.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${localStorage.getItem("access_token")}`;
+        });
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
-  },
-  getters: {
-    getMailById: (state) => (id) =>
-      state.mails.find((mail) => mail.login.username == id),
   },
 });
