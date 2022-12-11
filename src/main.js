@@ -4,20 +4,16 @@ import router from "./router";
 import vuetify from "./plugins/vuetify";
 import { loadFonts } from "./plugins/webfontloader";
 import { createPinia } from "pinia";
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 
-// import axios from "axios";
-
-// axios.defaults.withCredentials = true;
-// axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
-// axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-//   "access_token"
-// )}`;
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 loadFonts();
 
 createApp(App)
   .use(router)
-  .use(createPinia())
+  .use(pinia)
   .use(vuetify)
 
   .mount("#app");

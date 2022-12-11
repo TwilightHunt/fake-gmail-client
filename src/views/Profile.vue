@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div>{{ imagePath }}</div>
     <img :src="imagePath" alt="" />
     <h4>{{ user.firstname }} {{ user.lastname }}</h4>
     <div>{{ user.email }}</div>
