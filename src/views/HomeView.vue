@@ -23,7 +23,6 @@ if (localStorage.getItem("access_token")) {
 <template>
   <div v-if="isAuth">
     <navigation />
-    <v-btn @click="getUsers">get users</v-btn>
     <v-btn @click="logout">Logout</v-btn>
     <EmailItem v-for="mail in mails" :info="mail" :key="mail.id.value" />
   </div>
