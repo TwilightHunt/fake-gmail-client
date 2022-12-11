@@ -1,17 +1,3 @@
-<!-- <script setup>
-import { storeToRefs } from "pinia";
-import { useUserStore } from "../stores/user";
-
-const data = reactive({
-  email: "",
-  password: "",
-});
-
-async function onLogin() {
-  
-}
-</script> -->
-
 <script>
 import { useUserStore } from "../stores/user";
 export default {

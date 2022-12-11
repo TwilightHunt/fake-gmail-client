@@ -1,16 +1,17 @@
 <script setup>
 import avatar from "./avatar.vue";
 import burger from "./burger.vue";
-</script>
+import { useUserStore } from "../stores/user";
+import { storeToRefs } from "pinia";
 
+const { user } = storeToRefs(useUserStore());
+</script>
 <template>
   <div class="navigation">
     <burger />
-    <a href="/profile">
-      <avatar
-        :src="'https://cdn.dribbble.com/users/1671018/screenshots/4403882/nuxt-design-color-clouds-1.png'"
-      />
-    </a>
+    <router-link to="/profile">
+      <avatar :src="`http://localhost:8080/${user.profileImage}`" />
+    </router-link>
   </div>
 </template>
 
