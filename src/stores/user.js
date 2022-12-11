@@ -63,7 +63,6 @@ export const useUserStore = defineStore({
     async checkAuth() {
       try {
         AuthApi.refresh().then((res) => {
-          console.log(res);
           localStorage.setItem("access_token", res.data.accessToken);
           const newUser = res.data.user;
 

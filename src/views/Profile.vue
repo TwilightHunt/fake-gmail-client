@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>{{ imagePath }}</div>
     <img :src="imagePath" alt="" />
     <h4>{{ user.firstname }} {{ user.lastname }}</h4>
     <div>{{ user.email }}</div>
@@ -8,12 +7,24 @@
   <router-view></router-view>
 </template>
 
-<script setup>
+<script>
 import { useUserStore } from "../stores/user";
-import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
-const { user } = storeToRefs(useUserStore());
-const imagePath = `http://localhost:8080/${user.profileImage}`;
+export default {
+  data() {
+    return {
+      imagePath: `http://localhost:8080/${this.user.profileImage}`,
+    };
+  },
+  setup() {
+    const userStore = useUserStore();
+    const user = ref(userStore.user);
+    return {
+      user,
+    };
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
