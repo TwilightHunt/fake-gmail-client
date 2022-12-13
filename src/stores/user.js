@@ -64,7 +64,37 @@ export const useUserStore = defineStore({
       try {
         AuthApi.refresh().then((res) => {
           localStorage.setItem("access_token", res.data.accessToken);
+          
           const newUser = res.data.user;
+          console.log(newUser);
+          if (newUser) {
+            this.isAuth = true;
+          }
+
+          this.user = newUser;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async update(property, value) {
+      try {
+        const entries = Object.entries(this.user);
+
+        console.log(entries);
+
+        let formData = new FormData();
+        entries.forEach(([key, val] = entry) => {
+          formData.set(key, val);
+        });
+
+        console.log(formData);
+
+        formData.set(property, value);
+
+        AuthApi.update(formData).then((res) => {
+          const newUser = res.data.user;
+          console.log(newUser);
 
           if (newUser) {
             this.isAuth = true;

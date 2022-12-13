@@ -19,3 +19,13 @@ const defaultConfig = {
 };
 
 export const DefaultApiInstanse = axios.create(defaultConfig);
+
+const updateConfig = {
+  withCredentials: true,
+  baseURL: import.meta.env.VITE_BASE_URL,
+  headers: {
+    "Content-Type": "application/form-data"
+  },
+};
+
+export const UpdateApiInstanse = axios.create(updateConfig);

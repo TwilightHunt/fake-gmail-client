@@ -1,4 +1,4 @@
-import { LoginApiInstanse, DefaultApiInstanse } from "..";
+import { LoginApiInstanse, DefaultApiInstanse, UpdateApiInstanse } from "..";
 
 export const AuthApi = {
   register(data) {
@@ -16,6 +16,11 @@ export const AuthApi = {
   logout() {
     const url = "/logout";
     return DefaultApiInstanse.post(url);
+  },
+  update(data) {
+    console.log(data);
+    const url = "/user";
+    return UpdateApiInstanse.put(url, data);
   },
   refresh() {
     const url = "/refresh";

@@ -1,7 +1,7 @@
 <template>
   <div class="profile-body">
     <img :src="imagePath" alt="" />
-    <v-btn>Change image </v-btn>
+    <v-btn @click="updatePicture">Change image </v-btn>
     <input
       type="file"
       id="image"
@@ -11,8 +11,8 @@
     />
     <img
       :class="`temp-img ${this.imageIsSelected ? '_active' : ''}`"
-      :src="tempImage"
-      alt=""
+      :src="imageUrl"
+      alt="avatar"
     />
     <h4>{{ user.firstname }} {{ user.lastname }}</h4>
     <div>{{ user.email }}</div>
@@ -28,7 +28,8 @@ export default {
   data() {
     return {
       imagePath: `http://localhost:8080/${this.user.profileImage}`,
-      tempImage: "",
+      tempImage: {},
+      imageUrl: "",
       imageIsSelected: false,
     };
   },
@@ -41,9 +42,17 @@ export default {
   },
   methods: {
     showPreview(event) {
-      const newImage = URL.createObjectURL(event.target.files[0]);
-      this.tempImage = newImage;
+      this.tempImage = event.target.files[0];
+      this.imageUrl = URL.createObjectURL(event.target.files[0]);
       this.imageIsSelected = true;
+    },
+    async updatePicture() {
+      try {
+        const userStore = useUserStore();
+        await userStore.update("profileImage", this.tempImage);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
