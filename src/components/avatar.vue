@@ -1,6 +1,11 @@
 <template>
   <div>
-    <img :src="src" alt="" class="avatar" />
+    <img
+      :src="src"
+      alt=""
+      class="avatar"
+      :style="{ width: size + 'vw', height: size + 'vw' }"
+    />
   </div>
 </template>
 
@@ -8,15 +13,14 @@
 export default {
   props: {
     src: String,
+    size: Number,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .avatar {
-  height: 2vw;
-  width: 2vw;
   object-fit: cover;
-  border-radius: 50px;
+  border-radius: 50%;
 }
 </style>

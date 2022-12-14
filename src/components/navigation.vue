@@ -10,7 +10,7 @@ const { user } = storeToRefs(useUserStore());
   <div class="navigation">
     <burger />
     <router-link to="/profile">
-      <avatar :src="`http://localhost:8080/${user.profileImage}`" />
+      <avatar :src="`http://localhost:8080/${user.profileImage}`" :size="2" />
     </router-link>
   </div>
 </template>

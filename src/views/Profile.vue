@@ -1,15 +1,16 @@
 <template>
-  <div class="profile-body">
-    <img :src="imagePath" alt="" />
+  <div class="profile-body" id="wrapper">
+    <avatar :src="imagePath" :size="10" alt="" />
     <v-btn @click="updatePicture">Change image </v-btn>
     <input
       type="file"
-      id="image"
+      id="image-input"
       name="New image"
       accept="image/png, image/jpeg, image/jpg"
       @change="showPreview"
     />
     <img
+      v-if="imageIsSelected"
       :class="`temp-img ${this.imageIsSelected ? '_active' : ''}`"
       :src="imageUrl"
       alt="avatar"
@@ -23,6 +24,8 @@
 <script>
 import { useUserStore } from "../stores/user";
 import { ref } from "vue";
+import avatar from "../components/avatar.vue";
+import { compress, compressAccurately } from "image-conversion";
 
 export default {
   data() {
@@ -40,16 +43,28 @@ export default {
       user,
     };
   },
+  components: {
+    avatar,
+  },
   methods: {
-    showPreview(event) {
-      this.tempImage = event.target.files[0];
-      this.imageUrl = URL.createObjectURL(event.target.files[0]);
+    async showPreview(event) {
       this.imageIsSelected = true;
+
+      const res = await compress(event.target.files[0], {
+        quality: 0.8,
+        type: "image/jpeg",
+        width: 100,
+        height: 100,
+        scale: 0.5,
+      });
+      this.imageUrl = URL.createObjectURL(res);
+      this.tempImage = res;
     },
     async updatePicture() {
       try {
         const userStore = useUserStore();
         await userStore.update("profileImage", this.tempImage);
+        this.imageIsSelected = false;
       } catch (error) {
         console.log(error);
       }
@@ -63,14 +78,10 @@ export default {
   display: grid;
   grid-template-rows: min-content;
   row-gap: 1rem;
-  max-width: 5rem;
+  max-width: 10rem;
 }
 .temp-img {
-  visibility: hidden;
-  &._active {
-    visibility: visible;
-    width: 10rem;
-    height: 10rem;
-  }
+  visibility: visible;
+  object-fit: cover;
 }
 </style>

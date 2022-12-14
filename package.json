@@ -12,6 +12,7 @@
     "@mdi/font": "5.9.55",
     "axios": "^1.2.0",
     "dotenv": "^16.0.3",
+    "image-conversion": "^2.1.1",
     "pinia": "^2.0.26",
     "pinia-plugin-persistedstate": "^3.0.1",
     "roboto-fontface": "*",

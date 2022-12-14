@@ -67,6 +67,7 @@ export const useUserStore = defineStore({
           
           const newUser = res.data.user;
           console.log(newUser);
+
           if (newUser) {
             this.isAuth = true;
           }
@@ -81,27 +82,14 @@ export const useUserStore = defineStore({
       try {
         const entries = Object.entries(this.user);
 
-        console.log(entries);
-
         let formData = new FormData();
         entries.forEach(([key, val] = entry) => {
           formData.set(key, val);
         });
-
-        console.log(formData);
-
+        
         formData.set(property, value);
 
-        AuthApi.update(formData).then((res) => {
-          const newUser = res.data.user;
-          console.log(newUser);
-
-          if (newUser) {
-            this.isAuth = true;
-          }
-
-          this.user = newUser;
-        });
+        AuthApi.update(formData);
       } catch (error) {
         console.log(error);
       }
