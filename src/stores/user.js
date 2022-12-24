@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { AuthApi } from "../api/auth";
-import { DefaultApiInstanse } from "../api";
+import { DefaultApiInstanse, LoginApiInstanse } from "../api";
 
 export const useUserStore = defineStore({
   id: "user",
@@ -38,7 +38,7 @@ export const useUserStore = defineStore({
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
           localStorage.setItem("access_token", res.data.token);
-          DefaultApiInstanse.defaults.headers.common[
+          LoginApiInstanse.defaults.headers.common[
             "Authorization"
           ] = `Bearer ${localStorage.getItem("access_token")}`;
         });
@@ -86,10 +86,22 @@ export const useUserStore = defineStore({
         entries.forEach(([key, val] = entry) => {
           formData.set(key, val);
         });
-        
+
         formData.set(property, value);
 
         AuthApi.update(formData);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getUser(user) {
+      try {
+        AuthApi.getUser({user}).then((res) => {
+          DefaultApiInstanse.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${localStorage.getItem("access_token")}`;
+          console.log(res)
+        });
       } catch (error) {
         console.log(error);
       }

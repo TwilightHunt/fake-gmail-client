@@ -17,6 +17,7 @@
     />
     <h4>{{ user.firstname }} {{ user.lastname }}</h4>
     <div>{{ user.email }}</div>
+    <v-btn @click="logout">Logout</v-btn>
   </div>
   <router-view></router-view>
 </template>
@@ -25,7 +26,7 @@
 import { useUserStore } from "../stores/user";
 import { ref } from "vue";
 import avatar from "../components/avatar.vue";
-import { compress, compressAccurately } from "image-conversion";
+import { compress } from "image-conversion";
 
 export default {
   data() {
@@ -39,6 +40,7 @@ export default {
   setup() {
     const userStore = useUserStore();
     const user = ref(userStore.user);
+    const { logout } = useUserStore();
     return {
       user,
     };
@@ -65,6 +67,8 @@ export default {
         const userStore = useUserStore();
         await userStore.update("profileImage", this.tempImage);
         this.imageIsSelected = false;
+        userStore.checkAuth();
+        //location.reload();
       } catch (error) {
         console.log(error);
       }

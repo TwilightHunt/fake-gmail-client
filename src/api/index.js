@@ -1,31 +1,55 @@
 import axios from "axios";
 
-const loginConfig = {
+const LoginApiInstanse = axios.create({
   withCredentials: true,
+  credentials: 'include',
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
+    'Access-Control-Allow-Origin': '*'
   },
-};
+});
 
-export const LoginApiInstanse = axios.create(loginConfig);
-
-const defaultConfig = {
+const DefaultApiInstanse = axios.create({
   withCredentials: true,
+  credentials: 'include',
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
     "Content-Type": "application/json",
-  },
-};
+    'Access-Control-Allow-Origin': '*'
+  }, 
+})
 
-export const DefaultApiInstanse = axios.create(defaultConfig);
+DefaultApiInstanse.interceptors.response.use(
+  response => response,
+  error => {
+      const originalRequest = error.config;
+      if(error.response.status === 401){
+          try {
+              DefaultApiInstanse.get('/refresh').then(res => {
+                localStorage.setItem('access_token', res.data.accessToken)
+                // originalRequest.defaults.headers.common[
+                //   "Authorization"
+                // ] = `Bearer ${res.data.accessToken}`;
+                console.log(res);
+                console.log(originalRequest.headers.authorization);
+                DefaultApiInstanse.request({originalRequest});
+              });
+          } catch (error) {
+              console.log(error);
+          }
+      }
+  }
+)
 
-const updateConfig = {
+const UpdateApiInstanse = axios.create({
   withCredentials: true,
+  credentials: 'include',
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    "Content-Type": "application/form-data"
+    "Content-Type": "application/form-data",
+    'Access-Control-Allow-Origin': '*'
   },
-};
+});
 
-export const UpdateApiInstanse = axios.create(updateConfig);
+export { LoginApiInstanse, DefaultApiInstanse, UpdateApiInstanse };

@@ -18,7 +18,6 @@ export const AuthApi = {
     return DefaultApiInstanse.post(url);
   },
   update(data) {
-    console.log(data);
     const url = "/user";
     return UpdateApiInstanse.put(url, data);
   },
@@ -26,26 +25,8 @@ export const AuthApi = {
     const url = "/refresh";
     return DefaultApiInstanse.get(url);
   },
+  getUser(user) {
+    const url = "/users";
+    return DefaultApiInstanse.get(url);
+  },
 };
-
-DefaultApiInstanse.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.code === 401) {
-      try {
-        const originalRequest = error.config;
-
-        console.log(originalRequest);
-
-        localStorage.removeItem("access_token");
-        const response = DefaultApiInstanse.get("/refresh");
-        localStorage.setItem("access_token", response.data.accessToken);
-        location.reload();
-        return response;
-      } catch (error) {
-        console.log(e);
-      }
-    }
-    return Promise.reject(error);
-  }
-);
