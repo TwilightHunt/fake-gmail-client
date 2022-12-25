@@ -11,7 +11,7 @@ function toggleBurger(e) {
 </template>
 
 <style lang="scss" scoped>
-$burger-color: #0cbb86;
+$burger-color: #5f6368;
 @mixin btn($size, $left, $top) {
   width: $size;
   height: $size;
@@ -21,11 +21,9 @@ $burger-color: #0cbb86;
 }
 @mixin icon($height, $width) {
   transition-duration: 0.5s;
-  position: absolute;
+  position: relative;
   height: $height;
   width: $width;
-  top: 30px;
-  left: 20rem;
   background-color: $burger-color;
 }
 @mixin icon-before($height, $width, $top) {
