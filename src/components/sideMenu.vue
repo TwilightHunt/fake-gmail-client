@@ -1,6 +1,9 @@
 <template>
   <div class="side-menu">
-    <v-btn class="button_compose">Compose</v-btn>
+    <v-btn block class="button_compose">
+      <icon name="archive" class="icon" />
+      Compose</v-btn
+    >
     <nav class="links">
       <router-link to="/inbox" class="link">Inbox</router-link>
       <router-link to="/inbox" class="link">Inbox</router-link>
@@ -14,7 +17,10 @@
 </template>
 
 <script>
-export default {};
+import Icon from "./iconfont.vue";
+export default {
+  components: { Icon },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -24,13 +30,15 @@ export default {};
   width: 20em;
 }
 .button_compose {
-  margin: 0;
-  width: 100%;
 }
 .links {
   display: flex;
   flex-direction: column;
 }
 .link {
+}
+.icon {
+  min-height: 10px;
+  min-width: 10px;
 }
 </style>
