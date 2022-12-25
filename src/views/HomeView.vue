@@ -3,7 +3,7 @@ import { useMailsStore } from "../stores/mails";
 import { storeToRefs } from "pinia";
 import EmailItem from "../components/email-item.vue";
 import navigation from "../components/navigation.vue";
-import sideMenu from "../components/sideMenu.vue";
+import sideMenu from "../components/sideMenu/sideMenu.vue";
 import Auth from "../views/Auth.vue";
 import { useUserStore } from "../stores/user";
 
