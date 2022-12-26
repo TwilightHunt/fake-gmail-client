@@ -32,7 +32,7 @@ export default {
 <style lang="scss" scoped>
 .side-menu {
   margin-right: 16px;
-  width: 20em;
+  width: 240px;
 }
 .button_compose {
   display: flex;

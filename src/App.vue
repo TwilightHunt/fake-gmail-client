@@ -12,4 +12,7 @@
   font-family: "Google Sans";
   font-weight: 700;
 }
+body {
+  overflow: hidden;
+}
 </style>

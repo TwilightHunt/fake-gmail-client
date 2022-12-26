@@ -8,12 +8,8 @@ const { user } = storeToRefs(useUserStore());
 </script>
 <template>
   <div class="navigation">
-    <div class="logo-side">
-      <burger />
-      <a href="" class="logo-link">
-        <img class="logo-img" src="../assets/logo.svg" alt="gmail" />
-      </a>
-    </div>
+    <burger style="margin: 0 17px 0 16px" />
+    <img class="logo-img" src="../assets/logo.svg" alt="gmail" />
     <div class="search-input">
       <img
         class="serach-image"
@@ -47,7 +43,6 @@ const { user } = storeToRefs(useUserStore());
   padding: 8px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 .search {
   background: #eef3fc;
@@ -69,10 +64,12 @@ const { user } = storeToRefs(useUserStore());
   right: 17px;
 }
 .tools {
+  margin-left: auto;
   display: flex;
   column-gap: 20px;
 }
-.logo-side {
-  display: flex;
+.logo-img {
+  cursor: pointer;
+  margin-right: 95px;
 }
 </style>
