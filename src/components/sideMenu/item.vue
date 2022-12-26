@@ -28,7 +28,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 12px 4px 26px;
+  padding: 8px 12px 8px 26px;
   &:hover {
     background-color: #d3e2fd;
     border-radius: 0px 16px 16px 0px;

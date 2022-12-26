@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <router-view></router-view>
+  <router-view> </router-view>
 </template>
 <style>
 @font-face {
@@ -27,5 +27,7 @@
 }
 body {
   overflow: hidden;
+  background-color: #f6f8fc;
+  max-height: 100vh;
 }
 </style>

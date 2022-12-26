@@ -33,13 +33,17 @@ const props = defineProps({
   display: grid;
   grid-template-columns: 1fr 1fr;
   color: #000;
-  max-width: 50vw;
   row-gap: 2rem;
+  border: solid 1px transparent;
+  padding: 0 20px;
   & > div {
     display: inline-flex;
     align-items: center;
     justify-self: start;
     gap: 2rem;
+  }
+  &:hover {
+    border: solid 1px black;
   }
 }
 a {

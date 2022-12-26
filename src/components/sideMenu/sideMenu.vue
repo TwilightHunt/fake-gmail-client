@@ -37,7 +37,7 @@ export default {
 .button_compose {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
+  padding: 20px 24px;
   border-radius: 16px;
   font-family: "Google Sans";
   text-transform: capitalize;
