@@ -38,7 +38,7 @@ const { user } = storeToRefs(useUserStore());
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .navigation {
   padding: 8px;
   display: flex;
