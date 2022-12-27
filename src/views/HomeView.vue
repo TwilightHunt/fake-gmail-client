@@ -120,6 +120,8 @@ if (localStorage.getItem("access_token")) {
 .v-btn {
   &.counter-text {
     color: #5f6368;
+    font-size: 0.75em;
+    font-family: "Google Sans";
   }
   &.action-btn {
     width: 40px;

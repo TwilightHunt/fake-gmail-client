@@ -24,7 +24,7 @@
 }
 * {
   font-family: "Google Sans";
-  font-weight: 600;
+  font-weight: 400;
   font-size: 0.875rem;
   line-height: 114%;
 }
