@@ -41,21 +41,19 @@ if (localStorage.getItem("access_token")) {
                 />
               </v-btn>
             </div>
-            <v-btn icon elevation="0" x-small>
-              <icon name="reply" class="icon" color="#5F6368" />
+            <v-btn icon elevation="0" class="action-btn">
+              <v-icon color="#5F6368">mdi-reload</v-icon>
             </v-btn>
-            <v-btn icon elevation="0" x-small>
+            <v-btn icon elevation="0" class="action-btn">
               <icon name="options" class="icon" color="#5F6368" />
             </v-btn>
           </div>
           <div class="right-side">
-            <v-btn elevation="0" class="counter-text" x-small>
-              1-50 of 9999
-            </v-btn>
-            <v-btn icon elevation="0" x-small>
+            <v-btn elevation="0" class="counter-text"> 1-50 of 9999 </v-btn>
+            <v-btn icon elevation="0" class="action-btn _disabled">
               <v-icon color="#5F6368"> mdi-chevron-left </v-icon>
             </v-btn>
-            <v-btn icon elevation="0" x-small>
+            <v-btn icon elevation="0" class="action-btn">
               <v-icon color="#5F6368">mdi-chevron-right</v-icon>
             </v-btn>
           </div>
@@ -85,7 +83,7 @@ if (localStorage.getItem("access_token")) {
 }
 .mails__header {
   z-index: 10;
-  padding: 14px 16px;
+  padding: 0 5px;
   position: sticky;
   box-shadow: 0 2px 2px rgba(76, 81, 92, 0.123);
   background-color: #fff;
@@ -113,7 +111,29 @@ if (localStorage.getItem("access_token")) {
 .icon-button {
   padding: 2px 4px;
 }
-.v-btn.counter-text {
-  color: #5f6368;
+.v-btn {
+  &.counter-text {
+    color: #5f6368;
+  }
+  &.action-btn {
+    width: 40px;
+    height: 40px;
+    &._disabled {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+  &.checkbox-icon-btn {
+    padding: 0;
+    min-width: 10px;
+    width: 20px;
+    height: 40px;
+  }
+  &.checkbox-btn {
+    padding: 0;
+    min-width: 10px;
+    width: 35px;
+    height: 40px;
+  }
 }
 </style>
