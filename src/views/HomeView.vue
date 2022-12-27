@@ -62,6 +62,12 @@ if (localStorage.getItem("access_token")) {
           <EmailItem v-for="mail in mails" :info="mail" :key="mail.id.value" />
         </div>
       </div>
+      <div class="right-side">
+        <div class="calendar">
+          <div class="day">27</div>
+          <div class="month">Dec</div>
+        </div>
+      </div>
     </div>
   </div>
   <div v-else>
@@ -135,5 +141,20 @@ if (localStorage.getItem("access_token")) {
     width: 35px;
     height: 40px;
   }
+}
+.right-side {
+  padding: 10px 2px;
+  min-width: 60px;
+}
+.calendar {
+  text-align: center;
+  color: #202124;
+}
+.day {
+  font-weight: 800;
+  font-size: 2.125em;
+}
+.month {
+  font-size: 1.125em;
 }
 </style>

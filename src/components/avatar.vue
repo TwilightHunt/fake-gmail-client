@@ -4,7 +4,7 @@
       :src="src"
       alt=""
       class="avatar"
-      :style="{ width: size + 'vw', height: size + 'vw' }"
+      :style="{ width: size + 'px', height: size + 'px' }"
     />
   </div>
 </template>

@@ -29,14 +29,26 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px 8px 26px;
+  border-radius: 0px 16px 16px 0px;
   &:hover {
+    background-color: #ebecef;
+  }
+  &._active {
     background-color: #d3e2fd;
-    border-radius: 0px 16px 16px 0px;
+  }
+  &._bold {
+    & > .title,
+    .counter {
+      font-weight: 800;
+    }
   }
 }
 .title {
   display: flex;
   align-items: center;
   column-gap: 19px;
+}
+.counter {
+  font-size: 0.857em;
 }
 </style>

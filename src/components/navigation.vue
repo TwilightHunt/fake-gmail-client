@@ -32,7 +32,10 @@ const { user } = storeToRefs(useUserStore());
       />
       <img src="../assets/icons/navigation/apps.svg" alt="apps" class="apps" />
       <router-link to="/profile">
-        <avatar :src="`http://localhost:8080/${user.profileImage}`" :size="2" />
+        <avatar
+          :src="`http://localhost:8080/${user.profileImage}`"
+          :size="40"
+        />
       </router-link>
     </div>
   </div>
@@ -40,14 +43,15 @@ const { user } = storeToRefs(useUserStore());
 
 <style scoped lang="scss">
 .navigation {
-  padding: 8px;
+  padding: 8px 10px;
   display: flex;
   align-items: center;
 }
 .search {
   background: #eef3fc;
   border-radius: 8px;
-  width: 722px;
+  width: 37.6vw;
+  min-width: 256px;
   padding: 15px 57px;
 }
 .search-input {

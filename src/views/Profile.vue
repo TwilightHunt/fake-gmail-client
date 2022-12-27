@@ -1,6 +1,6 @@
 <template>
   <div class="profile-body" id="wrapper">
-    <avatar :src="imagePath" :size="10" alt="" />
+    <avatar :src="imagePath" :size="150" alt="" />
     <v-btn @click="updatePicture">Change image </v-btn>
     <input
       type="file"
