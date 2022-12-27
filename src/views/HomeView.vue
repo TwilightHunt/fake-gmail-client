@@ -55,14 +55,16 @@ if (localStorage.getItem("access_token")) {
   <router-view></router-view>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "../assets/styles/mixins/scrollbar.scss";
+@include scrollbar;
 .content {
   display: flex;
   flex-grow: 1;
 }
 .mails {
   max-height: 100vh;
-  padding: 57px 0px 10px 0px;
+  margin-top: 57px;
   overflow: auto;
   flex: 1;
   background-color: #fff;

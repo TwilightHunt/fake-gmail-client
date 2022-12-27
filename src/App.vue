@@ -19,6 +19,9 @@
   src: url("./fonts/GoogleSans-Bold.ttf") format("truetype");
   font-weight: 800;
 }
+::-webkit-scrollbar {
+  width: 0;
+}
 * {
   font-family: "Google Sans";
   font-weight: 600;

@@ -1,0 +1,28 @@
+@mixin scrollbar($color: #202124){
+    ::-webkit-scrollbar {
+        width: 0.8em;
+      }
+      ::-webkit-scrollbar-track {
+        background-color: #fff;
+        margin-block: -0.5em;
+        &:hover {
+          background-color: rgba($color, 0.1);
+        }
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba($color, 0.2);
+        border-radius: 100vw;
+        &:hover {
+          background-color: rgba($color, 0.3);
+        }
+        &:active {
+          background-color: rgba($color, 0.4);
+        }
+      }
+    @supports (scrollbar-color: $color) {
+        *{
+            scrollbar-color: rgba($color, 0.2) #fff;
+            scrollbar-width: auto;
+        }
+    }
+}
