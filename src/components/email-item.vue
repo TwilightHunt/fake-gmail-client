@@ -34,7 +34,7 @@ const props = defineProps({
   grid-template-columns: 1fr 1fr;
   color: #000;
   row-gap: 2rem;
-  border: solid 1px transparent;
+  border: solid 1px rgba(0, 0, 0, 0.05);
   padding: 0 20px;
   & > div {
     display: inline-flex;
@@ -43,7 +43,8 @@ const props = defineProps({
     gap: 2rem;
   }
   &:hover {
-    border: solid 1px black;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
 }
 a {
