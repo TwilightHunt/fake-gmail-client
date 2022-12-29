@@ -18,6 +18,15 @@ if (localStorage.getItem("access_token")) {
   checkAuth();
   fetchMails();
 }
+
+function getCurrentDate() {
+  const currentDate = new Date();
+
+  return {
+    day: currentDate.getDate(),
+    weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
+  };
+}
 </script>
 
 <template>
@@ -64,8 +73,8 @@ if (localStorage.getItem("access_token")) {
       </div>
       <div class="right-side">
         <div class="calendar">
-          <div class="day">27</div>
-          <div class="month">Dec</div>
+          <div class="day">{{ getCurrentDate().day }}</div>
+          <div class="weekday">{{ getCurrentDate().weekday }}</div>
         </div>
       </div>
     </div>
@@ -156,7 +165,7 @@ if (localStorage.getItem("access_token")) {
   font-weight: 800;
   font-size: 2.125em;
 }
-.month {
+.weekday {
   font-size: 1.125em;
 }
 </style>
