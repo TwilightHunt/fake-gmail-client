@@ -95,6 +95,8 @@ function getCurrentDate() {
 .mails {
   flex: 1;
   background-color: #fff;
+  border-radius: 16px;
+  overflow-x: hidden;
 }
 .mails__header {
   z-index: 10;
@@ -107,8 +109,8 @@ function getCurrentDate() {
   justify-content: space-between;
 }
 .mails__body {
-  max-height: 100vh;
-  overflow: auto;
+  max-height: 84vh;
+  overflow-y: auto;
 }
 .tools {
   display: flex;

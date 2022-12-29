@@ -29,8 +29,6 @@
   line-height: 114%;
 }
 body {
-  overflow: hidden;
   background-color: #f6f8fc;
-  max-height: 100vh;
 }
 </style>
