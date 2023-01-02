@@ -22,13 +22,17 @@
 ::-webkit-scrollbar {
   width: 0;
 }
-* {
+html {
+  /* font-family: "Google Sans";
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 114%; */
+}
+body {
   font-family: "Google Sans";
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 114%;
-}
-body {
   background-color: #f6f8fc;
 }
 </style>

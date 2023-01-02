@@ -7,6 +7,7 @@ import SideMenu from "../components/sideMenu/sideMenu.vue";
 import Auth from "../views/Auth.vue";
 import { useUserStore } from "../stores/user";
 import Icon from "../components/iconfont.vue";
+import Tabs from "../components/tabs.vue";
 
 const { mails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
@@ -65,6 +66,30 @@ function getCurrentDate() {
             <v-btn icon elevation="0" class="action-btn">
               <v-icon color="#5F6368">mdi-chevron-right</v-icon>
             </v-btn>
+          </div>
+        </div>
+        <div class="filter">
+          <div class="tab">
+            <input type="radio" name="css-tabs" id="tab-1" class="tab-switch" />
+            <label for="tab-1" class="tab-label">
+              <v-icon color="#5F6368"> mdi-inbox </v-icon>
+              <span>Primary</span>
+            </label>
+            <div class="tab-content"></div>
+          </div>
+          <div class="tab">
+            <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" />
+            <label for="tab-2" class="tab-label">
+              <v-icon color="#5F6368"> mdi-label-outline </v-icon>
+              <span>Promotions</span>
+            </label>
+          </div>
+          <div class="tab">
+            <input type="radio" name="css-tabs" id="tab-3" class="tab-switch" />
+            <label for="tab-3" class="tab-label">
+              <v-icon color="#5F6368"> mdi-account-multiple-outline </v-icon>
+              <span>Socials</span>
+            </label>
           </div>
         </div>
         <div class="mails__body">
@@ -169,5 +194,48 @@ function getCurrentDate() {
 }
 .weekday {
   font-size: 1.125em;
+}
+.filter {
+  display: flex;
+}
+.tabs::before,
+.tabs::after {
+  content: "";
+  display: table;
+}
+.tabs::after {
+  clear: both;
+}
+.tab-switch {
+  display: none;
+}
+:deep(.tab-label) {
+  position: relative;
+  display: block;
+  width: 252px;
+  font-weight: 600;
+  background-color: #fff;
+  cursor: pointer;
+  top: 0;
+  transition: all 0.25s;
+  padding: 16px;
+  &:hover {
+    background-color: #ebecef;
+  }
+}
+.tab-content {
+}
+.tab-switch:checked + .tab-label {
+  color: #1374e9;
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: #1374e9;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 3px;
+    border-radius: 3px;
+  }
 }
 </style>
