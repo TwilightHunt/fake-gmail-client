@@ -28,6 +28,29 @@ function getCurrentDate() {
     weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
   };
 }
+
+function switchIcons(event) {
+  const element = event.path[2];
+  if (element.classList.contains("filter")) {
+    const icons = element.querySelectorAll("input");
+
+    icons.forEach((element) => {
+      const icon = element.parentNode.querySelector("i");
+      const oldClass = icon.classList[0];
+
+      if (element.checked) {
+        const newClass = oldClass.replace("-outline", "");
+        icon.classList.replace(oldClass, newClass);
+        console.log(icon.classList[0]);
+        icon.style.color = "#1374e9";
+      } else if (!oldClass.includes("-outline")) {
+        const newClass = `${oldClass}-outline`;
+        icon.classList.replace(oldClass, newClass);
+        icon.style.color = "#5F6368";
+      }
+    });
+  }
+}
 </script>
 
 <template>
@@ -68,11 +91,13 @@ function getCurrentDate() {
             </v-btn>
           </div>
         </div>
-        <div class="filter">
+        <div class="filter" @click="switchIcons">
           <div class="tab">
             <input type="radio" name="css-tabs" id="tab-1" class="tab-switch" />
             <label for="tab-1" class="tab-label">
-              <v-icon color="#5F6368"> mdi-inbox </v-icon>
+              <v-icon color="#5F6368" class="tab-icon">
+                mdi-inbox-outline
+              </v-icon>
               <span>Primary</span>
             </label>
             <div class="tab-content"></div>
@@ -80,14 +105,18 @@ function getCurrentDate() {
           <div class="tab">
             <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" />
             <label for="tab-2" class="tab-label">
-              <v-icon color="#5F6368"> mdi-label-outline </v-icon>
+              <v-icon color="#5F6368" class="tab-icon">
+                mdi-label-outline
+              </v-icon>
               <span>Promotions</span>
             </label>
           </div>
           <div class="tab">
             <input type="radio" name="css-tabs" id="tab-3" class="tab-switch" />
             <label for="tab-3" class="tab-label">
-              <v-icon color="#5F6368"> mdi-account-multiple-outline </v-icon>
+              <v-icon color="#5F6368" class="tab-icon">
+                mdi-account-multiple-outline
+              </v-icon>
               <span>Socials</span>
             </label>
           </div>
@@ -187,6 +216,7 @@ function getCurrentDate() {
 .calendar {
   text-align: center;
   color: #202124;
+  line-height: 160%;
 }
 .day {
   font-weight: 800;
@@ -223,8 +253,6 @@ function getCurrentDate() {
     background-color: #ebecef;
   }
 }
-.tab-content {
-}
 .tab-switch:checked + .tab-label {
   color: #1374e9;
   &::after {
@@ -237,5 +265,8 @@ function getCurrentDate() {
     height: 3px;
     border-radius: 3px;
   }
+}
+.tab-icon {
+  margin-right: 16px;
 }
 </style>
