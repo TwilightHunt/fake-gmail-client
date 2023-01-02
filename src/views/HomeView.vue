@@ -38,9 +38,13 @@ function checkIcon(icon) {
 
 function uncheckIcon(icon) {
   const oldClass = icon.classList[0];
-  const newClass = `${oldClass}-outline`;
-  icon.classList.replace(oldClass, newClass);
-  icon.style.color = "#5F6368";
+  if (oldClass.includes("-outline")) {
+    checkIcon(icon);
+  } else {
+    const newClass = `${oldClass}-outline`;
+    icon.classList.replace(oldClass, newClass);
+    icon.style.color = "#5F6368";
+  }
 }
 
 function switchIcons(event) {
@@ -50,11 +54,10 @@ function switchIcons(event) {
 
     icons.forEach((element) => {
       const icon = element.parentNode.querySelector("i");
-      const oldClass = icon.classList[0];
 
       if (element.checked) {
         checkIcon(icon);
-      } else if (!oldClass.includes("-outline")) {
+      } else {
         uncheckIcon(icon);
       }
     });
