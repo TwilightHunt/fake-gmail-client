@@ -29,6 +29,20 @@ function getCurrentDate() {
   };
 }
 
+function checkIcon(icon) {
+  const oldClass = icon.classList[0];
+  const newClass = oldClass.replace("-outline", "");
+  icon.classList.replace(oldClass, newClass);
+  icon.style.color = "#1374e9";
+}
+
+function uncheckIcon(icon) {
+  const oldClass = icon.classList[0];
+  const newClass = `${oldClass}-outline`;
+  icon.classList.replace(oldClass, newClass);
+  icon.style.color = "#5F6368";
+}
+
 function switchIcons(event) {
   const element = event.path[2];
   if (element.classList.contains("filter")) {
@@ -39,14 +53,9 @@ function switchIcons(event) {
       const oldClass = icon.classList[0];
 
       if (element.checked) {
-        const newClass = oldClass.replace("-outline", "");
-        icon.classList.replace(oldClass, newClass);
-        console.log(icon.classList[0]);
-        icon.style.color = "#1374e9";
+        checkIcon(icon);
       } else if (!oldClass.includes("-outline")) {
-        const newClass = `${oldClass}-outline`;
-        icon.classList.replace(oldClass, newClass);
-        icon.style.color = "#5F6368";
+        uncheckIcon(icon);
       }
     });
   }
@@ -93,11 +102,15 @@ function switchIcons(event) {
         </div>
         <div class="filter" @click="switchIcons">
           <div class="tab">
-            <input type="radio" name="css-tabs" id="tab-1" class="tab-switch" />
+            <input
+              type="radio"
+              checked
+              name="css-tabs"
+              id="tab-1"
+              class="tab-switch"
+            />
             <label for="tab-1" class="tab-label">
-              <v-icon color="#5F6368" class="tab-icon">
-                mdi-inbox-outline
-              </v-icon>
+              <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
               <span>Primary</span>
             </label>
             <div class="tab-content"></div>
