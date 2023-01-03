@@ -7,6 +7,7 @@ import SideMenu from "../components/sideMenu/sideMenu.vue";
 import Auth from "../views/Auth.vue";
 import { useUserStore } from "../stores/user";
 import Icon from "../components/iconfont.vue";
+import Mail from "../components/mail.vue";
 
 const { mails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
@@ -55,7 +56,8 @@ function switchIcons(event) {
     <Navigation />
     <div class="content">
       <SideMenu />
-      <div class="mails">
+      <Mail v-if="$route.params.id" />
+      <div v-else class="mails">
         <div class="mails__header">
           <div class="tools">
             <div class="selector">

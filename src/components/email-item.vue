@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <a href="/id">
+  <router-link :to="`${info.login.username}`">
     <div class="email-item _container">
       <div>
         <input
@@ -25,7 +25,7 @@ const props = defineProps({
         <div class="email-item__snippet">{{ info.login.sha256 }}</div>
       </div>
     </div>
-  </a>
+  </router-link>
 </template>
 
 <style scoped lang="scss">
