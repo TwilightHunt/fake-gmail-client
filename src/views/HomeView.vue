@@ -7,7 +7,6 @@ import SideMenu from "../components/sideMenu/sideMenu.vue";
 import Auth from "../views/Auth.vue";
 import { useUserStore } from "../stores/user";
 import Icon from "../components/iconfont.vue";
-import Tabs from "../components/tabs.vue";
 
 const { mails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
@@ -29,36 +28,22 @@ function getCurrentDate() {
   };
 }
 
-function checkIcon(icon) {
-  const oldClass = icon.classList[0];
-  const newClass = oldClass.replace("-outline", "");
-  icon.classList.replace(oldClass, newClass);
-  icon.style.color = "#1374e9";
-}
-
-function uncheckIcon(icon) {
-  const oldClass = icon.classList[0];
-  if (oldClass.includes("-outline")) {
-    checkIcon(icon);
-  } else {
-    const newClass = `${oldClass}-outline`;
-    icon.classList.replace(oldClass, newClass);
-    icon.style.color = "#5F6368";
-  }
-}
-
 function switchIcons(event) {
   const element = event.path[2];
   if (element.classList.contains("filter")) {
     const icons = element.querySelectorAll("input");
-
     icons.forEach((element) => {
       const icon = element.parentNode.querySelector("i");
-
+      const oldClass = icon.classList[0];
       if (element.checked) {
-        checkIcon(icon);
-      } else {
-        uncheckIcon(icon);
+        const newClass = oldClass.replace("-outline", "");
+        icon.classList.replace(oldClass, newClass);
+        console.log(icon.classList[0]);
+        icon.style.color = "#1374e9";
+      } else if (!oldClass.includes("-outline")) {
+        const newClass = `${oldClass}-outline`;
+        icon.classList.replace(oldClass, newClass);
+        icon.style.color = "#5F6368";
       }
     });
   }
@@ -103,42 +88,64 @@ function switchIcons(event) {
             </v-btn>
           </div>
         </div>
-        <div class="filter" @click="switchIcons">
-          <div class="tab">
-            <input
-              type="radio"
-              checked
-              name="css-tabs"
-              id="tab-1"
-              class="tab-switch"
-            />
-            <label for="tab-1" class="tab-label">
-              <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
-              <span>Primary</span>
-            </label>
-            <div class="tab-content"></div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="css-tabs" id="tab-2" class="tab-switch" />
-            <label for="tab-2" class="tab-label">
-              <v-icon color="#5F6368" class="tab-icon">
-                mdi-label-outline
-              </v-icon>
-              <span>Promotions</span>
-            </label>
-          </div>
-          <div class="tab">
-            <input type="radio" name="css-tabs" id="tab-3" class="tab-switch" />
-            <label for="tab-3" class="tab-label">
-              <v-icon color="#5F6368" class="tab-icon">
-                mdi-account-multiple-outline
-              </v-icon>
-              <span>Socials</span>
-            </label>
-          </div>
-        </div>
+
         <div class="mails__body">
-          <EmailItem v-for="mail in mails" :info="mail" :key="mail.id.value" />
+          <div class="filter" @click="switchIcons">
+            <div class="tab">
+              <input
+                type="radio"
+                checked
+                name="css-tabs"
+                id="tab-1"
+                class="tab-switch"
+              />
+              <label for="tab-1" class="tab-label">
+                <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
+                <span>Primary</span>
+              </label>
+              <div class="tab-content">
+                <EmailItem
+                  v-for="mail in mails"
+                  :info="mail"
+                  :key="mail.id.value"
+                />
+              </div>
+            </div>
+            <div class="tab">
+              <input
+                type="radio"
+                name="css-tabs"
+                id="tab-2"
+                class="tab-switch"
+              />
+              <label for="tab-2" class="tab-label">
+                <v-icon color="#5F6368" class="tab-icon">
+                  mdi-label-outline
+                </v-icon>
+                <span>Promotions</span>
+              </label>
+              <div class="tab-content">
+                <div>Promotions</div>
+              </div>
+            </div>
+            <div class="tab">
+              <input
+                type="radio"
+                name="css-tabs"
+                id="tab-3"
+                class="tab-switch"
+              />
+              <label for="tab-3" class="tab-label">
+                <v-icon color="#5F6368" class="tab-icon">
+                  mdi-account-multiple-outline
+                </v-icon>
+                <span>Socials</span>
+              </label>
+              <div class="tab-content">
+                <div>Socials</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="right-side">
@@ -181,6 +188,7 @@ function switchIcons(event) {
 .mails__body {
   max-height: 84vh;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 .tools {
   display: flex;
@@ -242,29 +250,25 @@ function switchIcons(event) {
   font-size: 1.125em;
 }
 .filter {
-  display: flex;
+  position: relative;
+  background: #fff;
+  height: 84vh;
 }
-.tabs::before,
-.tabs::after {
-  content: "";
-  display: table;
-}
-.tabs::after {
-  clear: both;
+.tab {
+  float: left;
 }
 .tab-switch {
   display: none;
 }
-:deep(.tab-label) {
+.tab-label {
   position: relative;
   display: block;
-  width: 252px;
+  background: #fff;
   font-weight: 600;
-  background-color: #fff;
   cursor: pointer;
-  top: 0;
-  transition: all 0.25s;
   padding: 16px;
+  width: 252px;
+  top: 0;
   &:hover {
     background-color: #ebecef;
   }
@@ -284,5 +288,17 @@ function switchIcons(event) {
 }
 .tab-icon {
   margin-right: 16px;
+}
+.tab-content {
+  width: 100%;
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  left: 0;
+  background: #fff;
+}
+.tab-switch:checked + label + .tab-content {
+  z-index: 2;
+  opacity: 1;
 }
 </style>
