@@ -294,6 +294,7 @@ if (localStorage.getItem("access_token")) {
   cursor: pointer;
   padding: 16px;
   width: 252px;
+  z-index: 15;
   top: 0;
   &:hover {
     background-color: #ebecef;
