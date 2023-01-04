@@ -1,6 +1,6 @@
 <template>
   <div class="compose">
-    <header class="header">
+    <header class="header" @click="$emit('changeComposeVisibility')">
       <div class="title">New message</div>
       <div class="tools">
         <div class="tool">

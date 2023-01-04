@@ -1,14 +1,62 @@
-<script setup>
-import { useMailsStore } from "../stores/mails";
-import { storeToRefs } from "pinia";
+<script>
+/* --> Components */
+import Compose from "../components/compose.vue";
+import Icon from "../components/iconfont.vue";
+import Mail from "../components/mail.vue";
 import EmailItem from "../components/email-item.vue";
 import Navigation from "../components/navigation.vue";
 import SideMenu from "../components/sideMenu/sideMenu.vue";
+
+/* --> Views */
 import Auth from "../views/Auth.vue";
+
+export default {
+  data() {
+    return {
+      isComposeActive: false,
+    };
+  },
+  methods: {
+    changeComposeVisibility() {
+      console.log("compose!");
+      this.isComposeActive = !this.isComposeActive;
+    },
+    getCurrentDate() {
+      const currentDate = new Date();
+
+      return {
+        day: currentDate.getDate(),
+        weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
+      };
+    },
+    switchIcons(event) {
+      const element = event.path[2];
+      if (element.classList.contains("filter")) {
+        const icons = element.querySelectorAll("input");
+        icons.forEach((element) => {
+          const icon = element.parentNode.querySelector("i");
+          const oldClass = icon.classList[0];
+          if (element.checked) {
+            const newClass = oldClass.replace("-outline", "");
+            icon.classList.replace(oldClass, newClass);
+            console.log(icon.classList[0]);
+            icon.style.color = "#1374e9";
+          } else if (!oldClass.includes("-outline")) {
+            const newClass = `${oldClass}-outline`;
+            icon.classList.replace(oldClass, newClass);
+            icon.style.color = "#5F6368";
+          }
+        });
+      }
+    },
+  },
+};
+</script>
+
+<script setup>
+import { useMailsStore } from "../stores/mails";
+import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
-import Icon from "../components/iconfont.vue";
-import Mail from "../components/mail.vue";
-import Compose from "../components/compose.vue";
 
 const { mails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
@@ -20,43 +68,13 @@ if (localStorage.getItem("access_token")) {
   checkAuth();
   fetchMails();
 }
-
-function getCurrentDate() {
-  const currentDate = new Date();
-
-  return {
-    day: currentDate.getDate(),
-    weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
-  };
-}
-
-function switchIcons(event) {
-  const element = event.path[2];
-  if (element.classList.contains("filter")) {
-    const icons = element.querySelectorAll("input");
-    icons.forEach((element) => {
-      const icon = element.parentNode.querySelector("i");
-      const oldClass = icon.classList[0];
-      if (element.checked) {
-        const newClass = oldClass.replace("-outline", "");
-        icon.classList.replace(oldClass, newClass);
-        console.log(icon.classList[0]);
-        icon.style.color = "#1374e9";
-      } else if (!oldClass.includes("-outline")) {
-        const newClass = `${oldClass}-outline`;
-        icon.classList.replace(oldClass, newClass);
-        icon.style.color = "#5F6368";
-      }
-    });
-  }
-}
 </script>
 
 <template>
   <div v-if="isAuth">
     <Navigation />
     <div class="content">
-      <SideMenu />
+      <SideMenu @changeComposeVisibility="changeComposeVisibility" />
       <Mail v-if="$route.params.id" />
       <div v-else class="mails">
         <div class="mails__header">
@@ -149,7 +167,6 @@ function switchIcons(event) {
               </div>
             </div>
           </div>
-          <Compose />
         </div>
       </div>
       <div class="right-side">
@@ -158,6 +175,11 @@ function switchIcons(event) {
           <div class="weekday">{{ getCurrentDate().weekday }}</div>
         </div>
       </div>
+      <Compose
+        @changeComposeVisibility="changeComposeVisibility"
+        v-if="isComposeActive"
+        v-click-outside="changeComposeVisibility"
+      />
     </div>
   </div>
   <div v-else>
