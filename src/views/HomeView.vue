@@ -8,6 +8,7 @@ import Auth from "../views/Auth.vue";
 import { useUserStore } from "../stores/user";
 import Icon from "../components/iconfont.vue";
 import Mail from "../components/mail.vue";
+import Compose from "../components/compose.vue";
 
 const { mails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
@@ -148,6 +149,7 @@ function switchIcons(event) {
               </div>
             </div>
           </div>
+          <Compose />
         </div>
       </div>
       <div class="right-side">
