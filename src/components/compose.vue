@@ -17,13 +17,18 @@
       </div>
     </header>
     <form action="" class="form">
-      <input type="text" class="receiver" placeholder="Addressees" />
+      <input
+        type="text"
+        class="receiver"
+        placeholder="Addressees"
+        v-model="receiver"
+      />
       <input type="text" class="topic" placeholder="Topic" />
-      <textarea name="" class="message"></textarea>
+      <textarea name="" class="message" v-model="message"></textarea>
     </form>
     <footer class="footer">
       <div class="send-button">
-        <button class="button-text">Send</button>
+        <button class="button-text" @click="sendMessage">Send</button>
         <button class="button-icon">
           <v-icon color="#fff"> mdi-menu-down </v-icon>
         </button>
@@ -33,7 +38,24 @@
 </template>
 
 <script>
-export default {};
+import { useMailsStore } from "../stores/mails";
+import { storeToRefs } from "pinia";
+import { useUserStore } from "../stores/user.js";
+
+export default {
+  data() {
+    return {
+      message: "",
+      receiver: "",
+    };
+  },
+  methods: {
+    async sendMessage() {
+      const { user } = useUserStore();
+      useMailsStore().sendMail(this.receiver, user.email, this.message);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

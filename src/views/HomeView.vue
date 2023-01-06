@@ -18,7 +18,6 @@ export default {
   },
   methods: {
     changeComposeVisibility() {
-      console.log("compose!");
       this.isComposeActive = !this.isComposeActive;
     },
     getCurrentDate() {

@@ -40,7 +40,6 @@ export default {
   setup() {
     const userStore = useUserStore();
     const user = ref(userStore.user);
-    const { logout } = useUserStore();
     return {
       user,
     };
