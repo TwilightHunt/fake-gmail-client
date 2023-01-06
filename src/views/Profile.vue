@@ -68,10 +68,14 @@ export default {
         await userStore.update("profileImage", this.tempImage);
         this.imageIsSelected = false;
         userStore.checkAuth();
-        //location.reload();
       } catch (error) {
         console.log(error);
       }
+    },
+    async logout() {
+      const userStore = useUserStore();
+      await userStore.logout();
+      this.$router.push("/");
     },
   },
 };

@@ -29,25 +29,27 @@ export default {
         weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
       };
     },
-    switchIcons(event) {
-      const element = event.path[2];
-      if (element.classList.contains("filter")) {
-        const icons = element.querySelectorAll("input");
-        icons.forEach((element) => {
-          const icon = element.parentNode.querySelector("i");
-          const oldClass = icon.classList[0];
-          if (element.checked) {
-            const newClass = oldClass.replace("-outline", "");
-            icon.classList.replace(oldClass, newClass);
-            console.log(icon.classList[0]);
-            icon.style.color = "#1374e9";
-          } else if (!oldClass.includes("-outline")) {
-            const newClass = `${oldClass}-outline`;
-            icon.classList.replace(oldClass, newClass);
-            icon.style.color = "#5F6368";
-          }
-        });
-      }
+    changeIcon(icon, newClass, color) {
+      const oldClass = icon.classList[0];
+      icon.classList.replace(oldClass, newClass);
+      icon.style.color = color;
+    },
+    checkTabActivity() {
+      const tabs = document.querySelectorAll(".tab-switch");
+
+      tabs.forEach((el) => {
+        const icon = el.parentNode.querySelector("i");
+
+        if (el.checked) {
+          const newClass = icon.classList[0].replace("-outline", "");
+          this.changeIcon(icon, newClass, "#1374e9");
+          el.classList.add("_checked");
+        } else if (!el.checked && !icon.classList[0].includes("-outline")) {
+          const newClass = `${icon.classList[0]}-outline`;
+          this.changeIcon(icon, newClass, "#5F6368");
+          el.classList.remove("_checked");
+        }
+      });
     },
   },
 };
@@ -111,14 +113,14 @@ if (localStorage.getItem("access_token")) {
         </div>
 
         <div class="mails__body">
-          <div class="filter" @click="switchIcons">
+          <div class="filter" @click="checkTabActivity">
             <div class="tab">
               <input
                 type="radio"
                 checked
                 name="css-tabs"
                 id="tab-1"
-                class="tab-switch"
+                class="tab-switch _checked"
               />
               <label for="tab-1" class="tab-label">
                 <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
@@ -294,13 +296,12 @@ if (localStorage.getItem("access_token")) {
   cursor: pointer;
   padding: 16px;
   width: 252px;
-  z-index: 15;
   top: 0;
   &:hover {
     background-color: #ebecef;
   }
 }
-.tab-switch:checked + .tab-label {
+.tab-switch._checked + .tab-label {
   color: #1374e9;
   &::after {
     content: "";
@@ -324,7 +325,7 @@ if (localStorage.getItem("access_token")) {
   left: 0;
   background: #fff;
 }
-.tab-switch:checked + label + .tab-content {
+.tab-switch._checked + label + .tab-content {
   z-index: 2;
   opacity: 1;
 }
