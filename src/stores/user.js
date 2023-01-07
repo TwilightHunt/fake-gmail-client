@@ -16,14 +16,15 @@ export const useUserStore = defineStore({
       try {
         const data = { email, firstname, lastname, password, profileImage };
 
+        DefaultApiInstanse.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${localStorage.getItem("access_token")}`;
+
         AuthApi.register(data).then((res) => {
           this.user = res.data;
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
           localStorage.setItem("access_token", res.data.token);
-          DefaultApiInstanse.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${localStorage.getItem("access_token")}`;
         });
       } catch (error) {
         console.error(error);
@@ -32,15 +33,16 @@ export const useUserStore = defineStore({
     async login(email, password) {
       try {
         const data = { email, password };
+        
+        LoginApiInstanse.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${localStorage.getItem("access_token")}`;
 
         AuthApi.login(data).then((res) => {
           this.user = res.data.user;
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
           localStorage.setItem("access_token", res.data.token);
-          LoginApiInstanse.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${localStorage.getItem("access_token")}`;
         });
       } catch (error) {
         console.error(error);
@@ -96,10 +98,10 @@ export const useUserStore = defineStore({
     },
     async getUser(user) {
       try {
+        DefaultApiInstanse.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${localStorage.getItem("access_token")}`;
         AuthApi.getUser({user}).then((res) => {
-          DefaultApiInstanse.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${localStorage.getItem("access_token")}`;
           console.log(res)
         });
       } catch (error) {

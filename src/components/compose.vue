@@ -39,7 +39,6 @@
 
 <script>
 import { useMailsStore } from "../stores/mails";
-import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user.js";
 
 export default {

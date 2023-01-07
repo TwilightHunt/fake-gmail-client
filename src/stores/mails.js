@@ -20,13 +20,20 @@ export const useMailsStore = defineStore({
         const data = {receiver, senter, message}
 
         MailApi.send(data).then((res) => {
-          console.log(res);
-          this.sentMails = res.sentMails
+          this.getMails()
         })
         console.log(data);
       } catch (error) {
         console.log(error);
       }
+    },
+    async getMails(){
+      DefaultApiInstanse.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${localStorage.getItem("access_token")}`;
+      MailApi.getMails().then((res) => {
+        console.log(DefaultApiInstanse.defaults);
+      })
     }
   },
   getters: {

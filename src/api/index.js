@@ -26,15 +26,14 @@ DefaultApiInstanse.interceptors.response.use(
       const originalRequest = error.config;
       if(error.response.status === 401){
           try {
-              DefaultApiInstanse.get('/refresh').then(res => {
-                localStorage.setItem('access_token', res.data.accessToken)
-                // originalRequest.defaults.headers.common[
-                //   "Authorization"
-                // ] = `Bearer ${res.data.accessToken}`;
-                console.log(res);
-                console.log(originalRequest.headers.authorization);
-                DefaultApiInstanse.request({originalRequest});
+            DefaultApiInstanse.get('/refresh').then(res => {
+              localStorage.setItem('access_token', res.data.accessToken)
+              DefaultApiInstanse.request({...originalRequest, 
+                headers: {
+                  "Authorization" : `Bearer ${res.data.accessToken}`
+                }
               });
+            });
           } catch (error) {
               console.log(error);
           }

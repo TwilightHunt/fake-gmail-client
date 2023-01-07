@@ -59,7 +59,7 @@ import { useMailsStore } from "../stores/mails";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 
-const { mails } = storeToRefs(useMailsStore());
+const { receivedMails } = storeToRefs(useMailsStore());
 const { fetchMails } = useMailsStore();
 const { checkAuth } = useUserStore();
 
@@ -127,7 +127,7 @@ if (localStorage.getItem("access_token")) {
               </label>
               <div class="tab-content">
                 <EmailItem
-                  v-for="mail in mails"
+                  v-for="mail in receivedMails"
                   :info="mail"
                   :key="mail.id.value"
                 />
