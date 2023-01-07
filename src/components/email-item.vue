@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <router-link :to="`${info.login.username}`">
+  <router-link :to="`${info.senter.email}`">
     <div class="email-item _container">
       <div>
         <input
@@ -17,12 +17,17 @@ const props = defineProps({
           class="email-item__checkbox"
           @click.stop
         />
-        <avatar :src="info.picture.thumbnail" />
-        <div class="senter">{{ info.login.username }}</div>
+        <avatar
+          :src="`http://localhost:8080/${info.senter.profileImage}`"
+          :size="40"
+        />
+        <div class="senter">{{ info.senter.firstname }}</div>
       </div>
       <div>
-        <div class="email-item__title">{{ info.location.postcode }}</div>
-        <div class="email-item__snippet">{{ info.login.sha256 }}</div>
+        <div class="email-item__title">{{ info.senter.lastname }}</div>
+        <div class="email-item__snippet">
+          {{ info.message }}
+        </div>
       </div>
     </div>
   </router-link>
@@ -63,5 +68,6 @@ a {
   opacity: 0.5;
   max-width: 3em;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

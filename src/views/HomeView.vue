@@ -6,6 +6,7 @@ import Mail from "../components/mail.vue";
 import EmailItem from "../components/email-item.vue";
 import Navigation from "../components/navigation.vue";
 import SideMenu from "../components/sideMenu/sideMenu.vue";
+import Empty from "../components/empty.vue";
 
 /* --> Views */
 import Auth from "../views/Auth.vue";
@@ -60,14 +61,14 @@ import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 
 const { receivedMails } = storeToRefs(useMailsStore());
-const { fetchMails } = useMailsStore();
+const { getMails } = useMailsStore();
 const { checkAuth } = useUserStore();
 
 const { isAuth } = storeToRefs(useUserStore());
 
 if (localStorage.getItem("access_token")) {
   checkAuth();
-  fetchMails();
+  getMails();
 }
 </script>
 
@@ -126,11 +127,10 @@ if (localStorage.getItem("access_token")) {
                 <span>Primary</span>
               </label>
               <div class="tab-content">
-                <EmailItem
-                  v-for="mail in receivedMails"
-                  :info="mail"
-                  :key="mail.id.value"
-                />
+                <div v-if="receivedMails.length > 0">
+                  <EmailItem v-for="mail in receivedMails" :info="mail" />
+                </div>
+                <Empty v-else />
               </div>
             </div>
             <div class="tab">
@@ -147,7 +147,7 @@ if (localStorage.getItem("access_token")) {
                 <span>Promotions</span>
               </label>
               <div class="tab-content">
-                <div>Promotions</div>
+                <Empty />
               </div>
             </div>
             <div class="tab">
@@ -164,7 +164,7 @@ if (localStorage.getItem("access_token")) {
                 <span>Socials</span>
               </label>
               <div class="tab-content">
-                <div>Socials</div>
+                <Empty />
               </div>
             </div>
           </div>

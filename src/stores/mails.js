@@ -9,12 +9,6 @@ export const useMailsStore = defineStore({
     sentMails: []
   }),
   actions: {
-    async fetchMails() {
-      await fetch("https://randomuser.me/api/?results=25")
-        .then((res) => res.json())
-        .then((emails) => (this.receivedMails = emails.results))
-        .catch((error) => console.log(error));
-    },
     async sendMail(receiver, senter, message){
       try {
         const data = {receiver, senter, message}
