@@ -32,7 +32,8 @@ export const useMailsStore = defineStore({
         "Authorization"
       ] = `Bearer ${localStorage.getItem("access_token")}`;
       MailApi.getMails().then((res) => {
-        console.log(DefaultApiInstanse.defaults);
+        this.sentMails = res.data.sentMails;
+        this.receivedMails = res.data.receivedMails;
       })
     }
   },
