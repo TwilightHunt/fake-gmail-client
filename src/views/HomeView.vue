@@ -179,7 +179,6 @@ if (localStorage.getItem("access_token")) {
       <Compose
         @changeComposeVisibility="changeComposeVisibility"
         v-if="isComposeActive"
-        v-click-outside="changeComposeVisibility"
       />
     </div>
   </div>

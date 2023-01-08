@@ -22,9 +22,21 @@
         class="receiver"
         placeholder="Addressees"
         v-model="receiver"
+        @keydown="setOnBeforeUnload"
       />
-      <input type="text" class="topic" placeholder="Topic" />
-      <textarea name="" class="message" v-model="message"></textarea>
+      <input
+        type="text"
+        class="topic"
+        placeholder="Topic"
+        v-model="topic"
+        @keydown="setOnBeforeUnload"
+      />
+      <textarea
+        name=""
+        class="message"
+        v-model="message"
+        @keydown="setOnBeforeUnload"
+      ></textarea>
     </form>
     <footer class="footer">
       <div class="send-button">
@@ -46,12 +58,26 @@ export default {
     return {
       message: "",
       receiver: "",
+      topic: "",
     };
   },
   methods: {
     async sendMessage() {
       const { user } = useUserStore();
       useMailsStore().sendMail(this.receiver, user.email, this.message);
+    },
+    showWindow(event) {
+      event.preventDefault();
+      return (event.returnValue = "Are you sure you want to exit?");
+    },
+    setOnBeforeUnload() {
+      window.removeEventListener("beforeunload", this.showWindow);
+
+      if (this.message || this.receiver || this.topic) {
+        window.addEventListener("beforeunload", this.showWindow, {
+          once: true,
+        });
+      }
     },
   },
 };
