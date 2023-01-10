@@ -64,7 +64,12 @@ export default {
   methods: {
     async sendMessage() {
       const { user } = useUserStore();
-      useMailsStore().sendMail(this.receiver, user.email, this.message);
+      useMailsStore().sendMail(
+        this.receiver,
+        user.email,
+        this.topic,
+        this.message
+      );
     },
     showWindow(event) {
       event.preventDefault();

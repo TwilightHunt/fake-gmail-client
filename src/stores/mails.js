@@ -9,9 +9,9 @@ export const useMailsStore = defineStore({
     sentMails: []
   }),
   actions: {
-    async sendMail(receiver, senter, message){
+    async sendMail(receiver, senter, topic, message){
       try {
-        const data = {receiver, senter, message}
+        const data = {receiver, senter, topic, message}
 
         MailApi.send(data).then((res) => {
           this.getMails()
