@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <router-link :to="`${info.senter.email}`">
+  <router-link :to="`${info._id}`">
     <div class="email-item _container">
       <div>
         <input
@@ -22,7 +22,9 @@ const props = defineProps({
           :src="`http://localhost:8080/${info.senter.profileImage}`"
           :size="40"
         />
-        <div class="senter">{{ info.senter.firstname }}</div>
+        <div class="senter">
+          {{ info.senter.firstname }} {{ info.senter.lastname }}
+        </div>
       </div>
       <div>
         <div class="email-item__title">

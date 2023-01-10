@@ -9,6 +9,7 @@ export const useMailsStore = defineStore({
     sentMails: []
   }),
   actions: {
+   
     async sendMail(receiver, senter, topic, message){
       try {
         const data = {receiver, senter, topic, message}
@@ -32,7 +33,11 @@ export const useMailsStore = defineStore({
     }
   },
   getters: {
-    getMailById: (state) => (id) =>
-      state.mails.find((mail) => mail.login.username == id),
+    getMailById: (state) => (id) =>{
+      const allMails = state.receivedMails.concat(state.sendMail)
+      const mail = allMails.find(element => element._id === id);
+
+      return mail;
+    }
   },
 });
