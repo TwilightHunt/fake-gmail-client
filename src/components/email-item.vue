@@ -18,15 +18,16 @@ const props = defineProps({
           @click.stop
         />
         <avatar
+          class="email-item__icon"
           :src="`http://localhost:8080/${info.senter.profileImage}`"
           :size="40"
         />
         <div class="senter">{{ info.senter.firstname }}</div>
       </div>
       <div>
-        <div class="email-item__title">{{ info.senter.lastname }}</div>
-        <div class="email-item__snippet">
-          {{ info.message }}
+        <div class="email-item__title">
+          {{ info.topic ?? "< No topic >" }}
+          <span> - {{ info.message }} </span>
         </div>
       </div>
     </div>
@@ -45,7 +46,6 @@ const props = defineProps({
     display: inline-flex;
     align-items: center;
     justify-self: start;
-    gap: 2rem;
   }
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.1);
@@ -56,18 +56,24 @@ a {
   text-decoration: none;
 }
 .email-item__icon {
-  height: 2vw;
-  width: 2vw;
-  object-fit: cover;
-  border-radius: 50px;
+  align-items: center;
+  margin: 5px 0;
+  margin-right: 15px;
 }
 .senter {
   font-weight: 600;
 }
-.email-item__snippet {
-  opacity: 0.5;
+.email-item__checkbox {
+  margin-right: 12px;
+}
+.email-item__title {
   max-width: 3em;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 600;
+  & > span {
+    opacity: 0.5;
+    font-weight: 400;
+  }
 }
 </style>

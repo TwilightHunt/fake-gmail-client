@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <img
-      :src="src"
-      alt=""
-      class="avatar"
-      :style="{ width: size + 'px', height: size + 'px' }"
-    />
-  </div>
+  <img
+    :src="src"
+    alt=""
+    class="avatar"
+    :style="{ width: size + 'px', height: size + 'px' }"
+  />
 </template>
 
 <script>
