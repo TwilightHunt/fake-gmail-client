@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <router-link :to="`${info._id}`">
+  <router-link :to="`mail=${info._id}`">
     <div class="email-item _container">
       <div>
         <input

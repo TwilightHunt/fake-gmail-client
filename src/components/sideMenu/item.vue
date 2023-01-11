@@ -1,11 +1,11 @@
 <template>
-  <router-link :to="path" class="link">
+  <a :href="path" class="link">
     <div class="title">
       <icon :name="name" class="icon" />
       {{ value }}
     </div>
     <div class="counter">{{ amount }}</div>
-  </router-link>
+  </a>
 </template>
 
 <script>

@@ -63,13 +63,20 @@ export default {
   },
   methods: {
     async sendMessage() {
-      const { user } = useUserStore();
-      useMailsStore().sendMail(
-        this.receiver,
-        user.email,
-        this.topic,
-        this.message
-      );
+      try {
+        const { user } = useUserStore();
+        useMailsStore().sendMail(
+          this.receiver,
+          user.email,
+          this.topic,
+          this.message
+        );
+        this.$emit("changeComposeVisibility");
+        window.removeEventListener("beforeunload", this.showWindow);
+      } catch (error) {
+        alert("Something went wrong");
+        console.log(error);
+      }
     },
     showWindow(event) {
       event.preventDefault();

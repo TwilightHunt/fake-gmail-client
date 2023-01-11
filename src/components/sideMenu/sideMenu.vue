@@ -6,28 +6,28 @@
     </button>
     <nav class="links">
       <Item
-        :path="'/indox'"
+        :path="'#inbox'"
         :name="'inbox'"
         :value="'Inbox'"
         :amount="311"
         class="_active _bold"
       />
-      <Item :path="'/indox'" :name="'star'" :value="'Starred'" />
-      <Item :path="'/indox'" :name="'clocks'" :value="'Snoozed'" />
-      <Item :path="'/indox'" :name="'importnat'" :value="'Imoprtant'" />
-      <Item :path="'/indox'" :name="'chat'" :value="'Chats'" />
-      <Item :path="'/indox'" :name="'sent'" :value="'Sent'" />
-      <Item :path="'/indox'" :name="'draft'" :value="'Drafts'" />
+      <Item :path="'#indox'" :name="'star'" :value="'Starred'" />
+      <Item :path="'#snoozed'" :name="'clocks'" :value="'Snoozed'" />
+      <Item :path="'#important'" :name="'importnat'" :value="'Imoprtant'" />
+      <Item :path="'#chats'" :name="'chat'" :value="'Chats'" />
+      <Item :path="'#sent'" :name="'sent'" :value="'Sent'" />
+      <Item :path="'#drafts'" :name="'draft'" :value="'Drafts'" />
       <Item
-        :path="'/indox'"
+        :path="'#spam'"
         :name="'spam'"
         :value="'Spam'"
         :amount="311"
         class="_bold"
       />
-      <Item :path="'/indox'" :name="'mail'" :value="'All mail'" />
-      <Item :path="'/indox'" :name="'bin'" :value="'Bin'" />
-      <Item :path="'/indox'" :name="'down-arrow'" :value="'More'" />
+      <Item :path="'#all'" :name="'mail'" :value="'All mail'" />
+      <Item :path="'#bin'" :name="'bin'" :value="'Bin'" />
+      <Item :path="'#more'" :name="'down-arrow'" :value="'More'" />
     </nav>
   </div>
 </template>

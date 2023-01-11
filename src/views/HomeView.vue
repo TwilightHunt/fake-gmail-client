@@ -52,6 +52,9 @@ export default {
       });
     },
   },
+  mounted() {
+    this.$router.push("/#inbox");
+  },
 };
 </script>
 
@@ -60,7 +63,7 @@ import { useMailsStore } from "../stores/mails";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "../stores/user";
 
-const { receivedMails } = storeToRefs(useMailsStore());
+const { receivedMails, sentMails } = storeToRefs(useMailsStore());
 const { getMails } = useMailsStore();
 const { checkAuth } = useUserStore();
 
@@ -112,7 +115,7 @@ if (localStorage.getItem("access_token")) {
           </div>
         </div>
 
-        <div class="mails__body">
+        <div class="mails__body" id="inbox">
           <div class="filter" @click="checkTabActivity">
             <div class="tab">
               <input
@@ -169,6 +172,12 @@ if (localStorage.getItem("access_token")) {
             </div>
           </div>
         </div>
+        <div class="mails__body" id="sent">
+          <div v-if="sentMails.length > 0">
+            <EmailItem v-for="mail in sentMails" :info="mail" />
+          </div>
+          <Empty v-else />
+        </div>
       </div>
       <div class="right-side">
         <div class="calendar">
@@ -212,9 +221,13 @@ if (localStorage.getItem("access_token")) {
   justify-content: space-between;
 }
 .mails__body {
-  max-height: 84vh;
+  display: none;
+  height: 84vh;
   overflow-y: auto;
   overflow-x: hidden;
+  &:target {
+    display: block !important;
+  }
 }
 .tools {
   display: flex;
