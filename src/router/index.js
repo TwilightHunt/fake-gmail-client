@@ -19,6 +19,7 @@ const router = createRouter({
       component: () => import("../views/Profile.vue"),
     },
     { path: '/mail=:id', component: HomeView },
+    { path: '/section=:section', component: HomeView },
   ],
 });
 

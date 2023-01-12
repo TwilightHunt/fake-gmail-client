@@ -1,11 +1,11 @@
 <template>
-  <a :href="path" class="link" @click="goTo">
+  <router-link :to="`section=${path}`" class="link">
     <div class="title">
       <icon :name="name" class="icon" />
       {{ value }}
     </div>
     <div class="counter">{{ amount }}</div>
-  </a>
+  </router-link>
 </template>
 
 <script>

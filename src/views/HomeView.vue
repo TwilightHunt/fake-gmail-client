@@ -26,7 +26,7 @@ export default {
     if (localStorage.getItem("access_token")) {
       this.userStore.checkAuth();
       this.mailsStore.getMails();
-      this.$router.push("/#inbox");
+      this.$router.push(`/section=${this.$route.params.section ?? "inbox"}`);
     }
   },
   computed: {
@@ -121,8 +121,8 @@ export default {
             </v-btn>
           </div>
         </div>
-
-        <div class="mails__body" id="inbox">
+        <div v-if="$route.params.section === 'inbox'" class="mails__body">
+          <div></div>
           <div class="filter" @click="checkTabActivity">
             <div class="tab">
               <input
@@ -179,7 +179,7 @@ export default {
             </div>
           </div>
         </div>
-        <div class="mails__body" id="sent">
+        <div v-if="$route.params.section === 'sent'" class="mails__body">
           <div v-if="sentMails.length > 0">
             <EmailItem v-for="mail in sentMails" :info="mail" />
           </div>
@@ -228,13 +228,9 @@ export default {
   justify-content: space-between;
 }
 .mails__body {
-  display: none;
   height: 84vh;
   overflow-y: auto;
   overflow-x: hidden;
-  &:target {
-    display: block !important;
-  }
 }
 .tools {
   display: flex;
