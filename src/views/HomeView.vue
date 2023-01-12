@@ -32,7 +32,10 @@ export default {
   computed: {
     ...mapStores(useUserStore, useMailsStore),
     ...mapState(useUserStore, ["isAuth"]),
-    ...mapState(useMailsStore, ["sentMails", "receivedMails"]),
+    ...mapState(useMailsStore, {
+      receivedMails: (store) => store.getSortedReceivedMails,
+      sentMails: (store) => store.getSortedSentMails,
+    }),
   },
   methods: {
     changeComposeVisibility() {

@@ -1,5 +1,9 @@
 <template>
-  <router-link :to="`section=${path}`" class="link">
+  <router-link
+    :to="`section=${path}`"
+    class="link"
+    :class="this.$route.params?.section === path ? '_active' : ''"
+  >
     <div class="title">
       <icon :name="name" class="icon" />
       {{ value }}

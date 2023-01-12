@@ -10,7 +10,7 @@
         :name="'inbox'"
         :value="'Inbox'"
         :amount="311"
-        class="_active _bold"
+        class="_bold"
       />
       <Item :path="'starred'" :name="'star'" :value="'Starred'" />
       <Item :path="'snoozed'" :name="'clocks'" :value="'Snoozed'" />

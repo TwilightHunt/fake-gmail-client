@@ -38,6 +38,8 @@ export const useMailsStore = defineStore({
       const mail = allMails.find(element => element._id === id);
 
       return mail;
-    }
+    },
+    getSortedReceivedMails: (state) => state.receivedMails.reverse(),
+    getSortedSentMails: (state) => state.sentMails.reverse()
   },
 });
