@@ -11,11 +11,28 @@ import Empty from "../components/empty.vue";
 /* --> Views */
 import Auth from "../views/Auth.vue";
 
+/*  --> Pinia */
+import { mapStores, mapState } from "pinia";
+import { useUserStore } from "../stores/user";
+import { useMailsStore } from "../stores/mails";
+
 export default {
   data() {
     return {
       isComposeActive: false,
     };
+  },
+  mounted() {
+    if (localStorage.getItem("access_token")) {
+      this.userStore.checkAuth();
+      this.mailsStore.getMails();
+      this.$router.push("/#inbox");
+    }
+  },
+  computed: {
+    ...mapStores(useUserStore, useMailsStore),
+    ...mapState(useUserStore, ["isAuth"]),
+    ...mapState(useMailsStore, ["sentMails", "receivedMails"]),
   },
   methods: {
     changeComposeVisibility() {
@@ -52,27 +69,17 @@ export default {
       });
     },
   },
-  mounted() {
-    this.$router.push("/#inbox");
+  components: {
+    Compose,
+    Icon,
+    EmailItem,
+    Navigation,
+    SideMenu,
+    Empty,
+    Auth,
+    Mail,
   },
 };
-</script>
-
-<script setup>
-import { useMailsStore } from "../stores/mails";
-import { storeToRefs } from "pinia";
-import { useUserStore } from "../stores/user";
-
-const { receivedMails, sentMails } = storeToRefs(useMailsStore());
-const { getMails } = useMailsStore();
-const { checkAuth } = useUserStore();
-
-const { isAuth } = storeToRefs(useUserStore());
-
-if (localStorage.getItem("access_token")) {
-  checkAuth();
-  getMails();
-}
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <template>
-  <a :href="path" class="link">
+  <a :href="path" class="link" @click="goTo">
     <div class="title">
       <icon :name="name" class="icon" />
       {{ value }}

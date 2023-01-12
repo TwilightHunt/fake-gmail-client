@@ -34,7 +34,7 @@ export const useMailsStore = defineStore({
   },
   getters: {
     getMailById: (state) => (id) =>{
-      const allMails = state.receivedMails.concat(state.sendMail)
+      const allMails = state.receivedMails.concat(state.sentMails)
       const mail = allMails.find(element => element._id === id);
 
       return mail;
