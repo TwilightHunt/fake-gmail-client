@@ -12,6 +12,10 @@ export default {
       const { login } = useUserStore();
       await login(this.email, this.password);
     },
+    goBack() {
+      window.history.go(-1);
+      return false;
+    },
   },
 };
 </script>
@@ -19,51 +23,60 @@ export default {
 <template>
   <div class="auth">
     <div class="auth-box">
-      <img class="auth-box__logo" src="../assets/logo.svg" alt="" />
-      <transition name="goaway" mode="out-in">
-        <form
-          v-if="$route.path === '/'"
-          class="auth-box__content"
-          key="default"
+      <div class="auth-box__wrapper">
+        <div
+          v-if="$route.path !== '/'"
+          class="auth-box__back-button"
+          @click="goBack"
         >
-          <input
-            class="auth-box__input"
-            type="text"
-            placeholder="Email"
-            v-model="email"
-          />
-          <a href="" class="auth-box__input-tip">I don't remember</a>
-          <router-link
-            to="/login"
-            @click="onLogin"
-            class="auth-box__button _blue"
-            >Login</router-link
+          <v-icon color="#5F6368" size="30"> mdi-chevron-left </v-icon>
+        </div>
+        <img class="auth-box__logo" src="../assets/logo.svg" alt="" />
+        <transition name="goaway" mode="out-in">
+          <form
+            v-if="$route.path === '/'"
+            class="auth-box__content"
+            key="default"
           >
-          <router-link to="/register" class="auth-box__button">
-            Create a new account
-          </router-link>
-        </form>
-        <form
-          v-else-if="$route.path === '/login'"
-          class="auth-box__content"
-          key="login"
-        >
-          <input
-            class="auth-box__input"
-            type="password"
-            placeholder="Password"
-            v-model="password"
-          />
-          <a href="" class="auth-box__input-tip">I don't remember</a>
-          <router-link
-            to="/login"
-            @click="onLogin"
-            class="auth-box__button _blue"
+            <input
+              class="auth-box__input"
+              type="text"
+              placeholder="Email"
+              v-model="email"
+            />
+            <a href="" class="auth-box__input-tip">I don't remember</a>
+            <router-link
+              to="/login"
+              @click="onLogin"
+              class="auth-box__button _blue"
+              >Login</router-link
+            >
+            <router-link to="/register" class="auth-box__button">
+              Create a new account
+            </router-link>
+          </form>
+          <form
+            v-else-if="$route.path === '/login'"
+            class="auth-box__content"
+            key="login"
           >
-            Login
-          </router-link>
-        </form>
-      </transition>
+            <input
+              class="auth-box__input"
+              type="password"
+              placeholder="Password"
+              v-model="password"
+            />
+            <a href="" class="auth-box__input-tip">I don't remember</a>
+            <router-link
+              to="/login"
+              @click="onLogin"
+              class="auth-box__button _blue"
+            >
+              Login
+            </router-link>
+          </form>
+        </transition>
+      </div>
     </div>
   </div>
   <router-view />
@@ -85,15 +98,38 @@ export default {
 .auth-box {
   border-radius: 10px;
   background-color: #fff;
-  padding: 32px;
   margin: auto;
   text-align: center;
   width: 360px;
+  position: relative;
+}
+.auth-box__wrapper {
+  padding: 32px;
   overflow: hidden;
 }
 .auth-box__content {
   display: flex;
   flex-direction: column;
+}
+.auth-box__back-button {
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+  left: -15px;
+  z-index: 5;
+  cursor: pointer;
+  & > i {
+    position: relative;
+    top: 15%;
+    right: 5%;
+    transition: all 0.5s ease;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 }
 
 .auth-box__input {
@@ -126,13 +162,15 @@ export default {
 
 .goaway-enter-active,
 .goaway-leave-active {
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 .goaway-enter-from {
   transform: translate(-150%, 0);
+  opacity: 0;
 }
 .goaway-leave-to {
   transform: translate(150%, 0);
+  opacity: 0;
 }
 </style>
