@@ -17,11 +17,15 @@ export default {
 </script>
 
 <template>
-  <router-view>
-    <div class="auth">
-      <div class="auth-box">
-        <img class="auth-box__logo" src="../assets/logo.svg" alt="" />
-        <form class="auth-box__content">
+  <div class="auth">
+    <div class="auth-box">
+      <img class="auth-box__logo" src="../assets/logo.svg" alt="" />
+      <transition name="goaway" mode="out-in">
+        <form
+          v-if="$route.path === '/'"
+          class="auth-box__content"
+          key="default"
+        >
           <input
             class="auth-box__input"
             type="text"
@@ -29,14 +33,40 @@ export default {
             v-model="email"
           />
           <a href="" class="auth-box__input-tip">I don't remember</a>
-          <button @click="onLogin" class="auth-box__button _blue">Login</button>
-          <button to="register" class="auth-box__button">
+          <router-link
+            to="/login"
+            @click="onLogin"
+            class="auth-box__button _blue"
+            >Login</router-link
+          >
+          <router-link to="/register" class="auth-box__button">
             Create a new account
-          </button>
+          </router-link>
         </form>
-      </div>
+        <form
+          v-else-if="$route.path === '/login'"
+          class="auth-box__content"
+          key="login"
+        >
+          <input
+            class="auth-box__input"
+            type="password"
+            placeholder="Password"
+            v-model="password"
+          />
+          <a href="" class="auth-box__input-tip">I don't remember</a>
+          <router-link
+            to="/login"
+            @click="onLogin"
+            class="auth-box__button _blue"
+          >
+            Login
+          </router-link>
+        </form>
+      </transition>
     </div>
-  </router-view>
+  </div>
+  <router-view />
 </template>
 
 <style lang="scss" scoped>
@@ -53,22 +83,24 @@ export default {
   margin-bottom: 30px;
 }
 .auth-box {
-  border-radius: 30px;
+  border-radius: 10px;
   background-color: #fff;
   padding: 32px;
   margin: auto;
   text-align: center;
   width: 360px;
+  overflow: hidden;
 }
 .auth-box__content {
   display: flex;
   flex-direction: column;
 }
+
 .auth-box__input {
   padding: 2px 16px;
   height: 54px;
   font-size: 1.714em;
-  border: solid 2px #5f6368;
+  border: solid 1px #5f6368;
   border-radius: 10px;
 }
 .auth-box__input-tip {
@@ -76,6 +108,7 @@ export default {
   margin-right: auto;
 }
 .auth-box__button {
+  text-decoration: none;
   border-radius: 10px;
   font-size: 1.142em;
   padding: 14px 0;
@@ -89,5 +122,17 @@ export default {
   &:not(:last-child) {
     margin-bottom: 12px;
   }
+}
+
+.goaway-enter-active,
+.goaway-leave-active {
+  transition: transform 0.5s ease;
+}
+
+.goaway-enter-from {
+  transform: translate(-150%, 0);
+}
+.goaway-leave-to {
+  transform: translate(150%, 0);
 }
 </style>
