@@ -27,6 +27,7 @@ DefaultApiInstanse.interceptors.response.use(
       if(error.response.status === 401){
           try {
             DefaultApiInstanse.get('/refresh').then(res => {
+              console.log(res);
               localStorage.setItem('access_token', res.data.accessToken)
               DefaultApiInstanse.request({...originalRequest, 
                 headers: {
