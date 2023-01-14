@@ -1,5 +1,7 @@
 <script>
 import { useUserStore } from "../stores/user";
+import { mapState } from "pinia";
+
 export default {
   data() {
     return {
@@ -7,10 +9,18 @@ export default {
       password: "",
     };
   },
+  computed: {
+    ...mapState(useUserStore, ["user"]),
+  },
   methods: {
     async onLogin() {
-      const { login } = useUserStore();
-      await login(this.email, this.password);
+      try {
+        const { login } = useUserStore();
+        await login(this.email, this.password);
+        this.$router.push(`/uid=${this.user.id}`);
+      } catch (error) {
+        console.log(error);
+      }
     },
     goBack() {
       window.history.go(-1);
@@ -25,7 +35,7 @@ export default {
     <div class="auth-box">
       <div class="auth-box__wrapper">
         <div
-          v-if="$route.path !== '/'"
+          v-if="$route.path !== '/auth'"
           class="auth-box__back-button"
           @click="goBack"
         >
@@ -34,7 +44,7 @@ export default {
         <img class="auth-box__logo" src="../assets/logo.svg" alt="" />
         <transition name="goaway" mode="out-in">
           <form
-            v-if="$route.path === '/'"
+            v-if="$route.path === '/auth'"
             class="auth-box__content"
             key="default"
           >
@@ -45,10 +55,7 @@ export default {
               v-model="email"
             />
             <a href="" class="auth-box__input-tip">I don't remember</a>
-            <router-link
-              to="/login"
-              @click="onLogin"
-              class="auth-box__button _blue"
+            <router-link to="/login" class="auth-box__button _blue"
               >Login</router-link
             >
             <router-link to="/register" class="auth-box__button">

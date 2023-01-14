@@ -22,13 +22,6 @@ export default {
       isComposeActive: false,
     };
   },
-  mounted() {
-    if (localStorage.getItem("access_token")) {
-      this.userStore.checkAuth();
-      this.mailsStore.getMails();
-      this.$router.push(`/section=${this.$route.params.section ?? "inbox"}`);
-    }
-  },
   computed: {
     ...mapStores(useUserStore, useMailsStore),
     ...mapState(useUserStore, ["isAuth"]),

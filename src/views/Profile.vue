@@ -74,7 +74,7 @@ export default {
     async logout() {
       const userStore = useUserStore();
       await userStore.logout();
-      this.$router.push("/");
+      this.$router.push("/auth");
     },
   },
 };

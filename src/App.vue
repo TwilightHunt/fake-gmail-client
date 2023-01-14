@@ -1,8 +1,30 @@
-<script setup></script>
-
 <template>
-  <router-view> </router-view>
+  <router-view />
 </template>
+
+<script>
+import { mapStores, mapState } from "pinia";
+import { useUserStore } from "./stores/user";
+import { useMailsStore } from "./stores/mails";
+export default {
+  mounted() {
+    if (localStorage.getItem("access_token")) {
+      this.userStore.checkAuth();
+      this.mailsStore.getMails();
+      this.$router.push(
+        `/uid=${this.user.id}/section=${this.$route.params.section ?? "inbox"}`
+      );
+    } else {
+      this.$router.push("/auth");
+    }
+  },
+  computed: {
+    ...mapStores(useUserStore, useMailsStore),
+    ...mapState(useUserStore, ["user"]),
+  },
+};
+</script>
+
 <style>
 @font-face {
   font-family: "Google Sans";
