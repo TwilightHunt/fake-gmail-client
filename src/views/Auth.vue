@@ -1,6 +1,7 @@
 <script>
 import { useUserStore } from "../stores/user";
 import { mapState } from "pinia";
+import { VueRecaptcha } from "vue-recaptcha";
 
 export default {
   data() {
@@ -27,6 +28,7 @@ export default {
       return false;
     },
   },
+  components: { VueRecaptcha },
 };
 </script>
 
@@ -80,6 +82,47 @@ export default {
               class="auth-box__button _blue"
             >
               Login
+            </router-link>
+          </form>
+          <form
+            v-else-if="$route.path === '/register'"
+            class="auth-box__content"
+            key="register"
+          >
+            <input
+              class="auth-box__input"
+              type="text"
+              placeholder="Firstname"
+              v-model="firstname"
+            />
+            <input
+              class="auth-box__input"
+              type="text"
+              placeholder="Lastname"
+              v-model="lastname"
+            />
+            <input
+              class="auth-box__input"
+              type="email"
+              placeholder="Email"
+              v-model="email"
+            />
+            <input
+              class="auth-box__input"
+              type="password"
+              placeholder="Password"
+              v-model="password"
+            />
+            <vue-recaptcha
+              ref="recaptcha"
+              :sitekey="meta.env.VITE_CAPTCHA_SITEKEY"
+            />
+            <router-link
+              to="/register"
+              @click="onLogin"
+              class="auth-box__button _blue"
+            >
+              Register
             </router-link>
           </form>
         </transition>
@@ -145,6 +188,9 @@ export default {
   font-size: 1.714em;
   border: solid 1px #5f6368;
   border-radius: 10px;
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 }
 .auth-box__input-tip {
   padding: 10px 0 40px 0;
