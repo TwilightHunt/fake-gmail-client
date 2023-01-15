@@ -8,27 +8,27 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component: () => import("../App.vue")
+      component: () => import("../App.vue"),
     },
     {
       path: "/auth",
       name: "auth",
-      component: AuthView
+      component: AuthView,
     },
     {
       path: "/uid=:uid",
       name: "account",
-      component: HomeView 
+      component: HomeView,
     },
     {
       path: "/profile",
       name: "profile",
       component: () => import("../views/Profile.vue"),
     },
-    { path: '/uid=:uid/mail=:id', component: HomeView },
-    { path: '/login', component: AuthView },
-    { path: '/register', component: AuthView },
-    { path: '/uid=:uid/section=:section', component: HomeView },
+    { path: "/uid=:uid/section=:section/mail=:id", component: HomeView },
+    { path: "/login", component: AuthView },
+    { path: "/register", component: AuthView },
+    { path: "/uid=:uid/section=:section", component: HomeView },
   ],
 });
 

@@ -8,6 +8,7 @@ export default {
     return {
       email: "",
       password: "",
+      sitekey: import.meta.env.VITE_CAPTCHA_SITEKEY,
     };
   },
   computed: {
@@ -113,10 +114,7 @@ export default {
               placeholder="Password"
               v-model="password"
             />
-            <vue-recaptcha
-              ref="recaptcha"
-              :sitekey="meta.env.VITE_CAPTCHA_SITEKEY"
-            />
+            <vue-recaptcha ref="recaptcha" :sitekey="sitekey" class="captcha" />
             <router-link
               to="/register"
               @click="onLogin"
@@ -181,7 +179,9 @@ export default {
     }
   }
 }
-
+.captcha {
+  margin: 10px 0;
+}
 .auth-box__input {
   padding: 2px 16px;
   height: 54px;
