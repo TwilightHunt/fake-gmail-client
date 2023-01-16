@@ -43,11 +43,14 @@ export default {
       const label = form.querySelector("label");
       input.classList.add("_error");
       label.style.display = "block";
-      input.addEventListener("keydown", () => {
-        input.classList.remove("_error");
-        label.style.display = "none";
-        input.addEventListener(this);
-      });
+      input.addEventListener(
+        "keydown",
+        () => {
+          input.classList.remove("_error");
+          label.style.display = "none";
+        },
+        { once: true }
+      );
     },
   },
   components: { VueRecaptcha },
