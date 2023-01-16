@@ -28,6 +28,18 @@ export default {
       window.history.go(-1);
       return false;
     },
+    async checkEmail() {
+      try {
+        const { findUserByEmail } = useUserStore();
+        const user = await findUserByEmail(this.email);
+        console.log(user);
+        if (user) this.$router.push("/login");
+      } catch (error) {
+        const input = document.getElementById("email");
+        input.setAttribute("invalid");
+        throw new Error(error);
+      }
+    },
   },
   components: { VueRecaptcha },
 };
@@ -56,11 +68,12 @@ export default {
               type="text"
               placeholder="Email"
               v-model="email"
+              id="email"
             />
             <a href="" class="auth-box__input-tip">I don't remember</a>
-            <router-link to="/login" class="auth-box__button _blue"
-              >Login</router-link
-            >
+            <button @click.prevent="checkEmail" class="auth-box__button _blue">
+              Login
+            </button>
             <router-link to="/register" class="auth-box__button">
               Create a new account
             </router-link>
@@ -186,10 +199,14 @@ export default {
   padding: 2px 16px;
   height: 54px;
   font-size: 1.714em;
-  border: solid 1px #5f6368;
+  border: solid 2px #5f6368;
   border-radius: 10px;
   &:not(:last-child) {
     margin-bottom: 10px;
+  }
+  &:invalid {
+    border-color: #d30b0b;
+    color: #d30b0b;
   }
 }
 .auth-box__input-tip {

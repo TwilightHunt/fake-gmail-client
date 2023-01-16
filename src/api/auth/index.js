@@ -25,8 +25,8 @@ export const AuthApi = {
     const url = "/refresh";
     return DefaultApiInstanse.get(url);
   },
-  getUser(user) {
-    const url = "/users";
-    return DefaultApiInstanse.get(url);
+  getUserByEmail(email) {
+    const url = "/user";
+    return LoginApiInstanse.post(url, email);
   },
 };

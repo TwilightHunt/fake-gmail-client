@@ -33,7 +33,7 @@ export const useUserStore = defineStore({
     async login(email, password) {
       try {
         const data = { email, password };
-        
+
         LoginApiInstanse.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${localStorage.getItem("access_token")}`;
@@ -45,7 +45,6 @@ export const useUserStore = defineStore({
           localStorage.setItem("access_token", res.data.token);
           return this.user;
         });
-        
       } catch (error) {
         console.error(error);
       }
@@ -68,7 +67,7 @@ export const useUserStore = defineStore({
       try {
         AuthApi.refresh().then((res) => {
           localStorage.setItem("access_token", res.data.accessToken);
-          
+
           const newUser = res.data.user;
           console.log(newUser);
 
@@ -98,16 +97,13 @@ export const useUserStore = defineStore({
         console.log(error);
       }
     },
-    async getUser(user) {
+    async findUserByEmail(email) {
       try {
-        DefaultApiInstanse.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${localStorage.getItem("access_token")}`;
-        AuthApi.getUser({user}).then((res) => {
-          console.log(res)
-        });
+        const res = await AuthApi.getUserByEmail({ email });
+        console.log(res.data);
+        return res.data;
       } catch (error) {
-        console.log(error);
+        throw new Error(error);
       }
     },
   },
