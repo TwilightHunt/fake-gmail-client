@@ -35,10 +35,19 @@ export default {
         console.log(user);
         if (user) this.$router.push("/login");
       } catch (error) {
-        const input = document.getElementById("email");
-        input.setAttribute("invalid");
-        throw new Error(error);
+        this.makeInputInvalid(document.getElementById("email-form"));
       }
+    },
+    makeInputInvalid(form) {
+      const input = form.querySelector("input");
+      const label = form.querySelector("label");
+      input.classList.add("_error");
+      label.style.display = "block";
+      input.addEventListener("keydown", () => {
+        input.classList.remove("_error");
+        label.style.display = "none";
+        input.addEventListener(this);
+      });
     },
   },
   components: { VueRecaptcha },
@@ -62,6 +71,7 @@ export default {
             v-if="$route.path === '/auth'"
             class="auth-box__content"
             key="default"
+            id="email-form"
           >
             <input
               class="auth-box__input"
@@ -70,6 +80,9 @@ export default {
               v-model="email"
               id="email"
             />
+            <label for="email" class="auth-box__input__label"
+              >Invalid email</label
+            >
             <a href="" class="auth-box__input-tip">I don't remember</a>
             <button @click.prevent="checkEmail" class="auth-box__button _blue">
               Login
@@ -204,13 +217,18 @@ export default {
   &:not(:last-child) {
     margin-bottom: 10px;
   }
-  &:invalid {
-    border-color: #d30b0b;
-    color: #d30b0b;
+  &._error {
+    border-color: #ff0000;
+    color: #ff0000;
   }
 }
+.auth-box__input__label {
+  color: #ff0000;
+  margin-right: auto;
+  display: none;
+}
 .auth-box__input-tip {
-  padding: 10px 0 40px 0;
+  margin: 10px 0 30px 0;
   margin-right: auto;
 }
 .auth-box__button {
@@ -229,7 +247,6 @@ export default {
     margin-bottom: 12px;
   }
 }
-
 .goaway-enter-active,
 .goaway-leave-active {
   transition: all 0.5s ease;
