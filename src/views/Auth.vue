@@ -16,13 +16,17 @@ export default {
   },
   methods: {
     async onLogin() {
-      try {
-        const { login } = useUserStore();
-        await login(this.email, this.password);
-        this.$router.push(`/uid=${this.user.id}`);
-      } catch (error) {
-        console.log(error);
-      }
+      const { login } = useUserStore();
+      login(this.email, this.password)
+        .then((res) => {
+          this.$router.push(`/uid=${this.user.id}/section=inbox`);
+        })
+        .catch((err) => {
+          this.makeInputInvalid(
+            document.getElementById("password-form"),
+            "Incorrect password"
+          );
+        });
     },
     goBack() {
       window.history.go(-1);
@@ -31,16 +35,26 @@ export default {
     async checkEmail() {
       try {
         const { findUserByEmail } = useUserStore();
+
+        if (!this.email) {
+          this.makeInputInvalid(
+            document.getElementById("email-form", "This input cannot be blank")
+          );
+        }
+
         const user = await findUserByEmail(this.email);
-        console.log(user);
         if (user) this.$router.push("/login");
       } catch (error) {
-        this.makeInputInvalid(document.getElementById("email-form"));
+        this.makeInputInvalid(
+          document.getElementById("email-form"),
+          "User with this email does not exist"
+        );
       }
     },
-    makeInputInvalid(form) {
+    makeInputInvalid(form, error) {
       const input = form.querySelector("input");
       const label = form.querySelector("label");
+      label.innerText = error;
       input.classList.add("_error");
       label.style.display = "block";
       input.addEventListener(
@@ -83,9 +97,7 @@ export default {
               v-model="email"
               id="email"
             />
-            <label for="email" class="auth-box__input__label"
-              >Invalid email</label
-            >
+            <label for="email" class="auth-box__input__label"></label>
             <a href="" class="auth-box__input-tip">I don't remember</a>
             <button @click.prevent="checkEmail" class="auth-box__button _blue">
               Login
@@ -98,6 +110,7 @@ export default {
             v-else-if="$route.path === '/login'"
             class="auth-box__content"
             key="login"
+            id="password-form"
           >
             <input
               class="auth-box__input"
@@ -105,6 +118,7 @@ export default {
               placeholder="Password"
               v-model="password"
             />
+            <label for="password" class="auth-box__input__label"></label>
             <a href="" class="auth-box__input-tip">I don't remember</a>
             <router-link
               to="/login"
@@ -152,6 +166,14 @@ export default {
               Register
             </router-link>
           </form>
+          <div v-else>
+            <v-progress-circular
+              :size="50"
+              :width="7"
+              color="primary"
+              indeterminate
+            ></v-progress-circular>
+          </div>
         </transition>
       </div>
     </div>

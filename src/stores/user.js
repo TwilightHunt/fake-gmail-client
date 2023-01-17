@@ -38,7 +38,7 @@ export const useUserStore = defineStore({
           "Authorization"
         ] = `Bearer ${localStorage.getItem("access_token")}`;
 
-        AuthApi.login(data).then((res) => {
+        await AuthApi.login(data).then((res) => {
           this.user = res.data.user;
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
@@ -46,7 +46,7 @@ export const useUserStore = defineStore({
           return this.user;
         });
       } catch (error) {
-        console.error(error);
+        throw new Error(error);
       }
     },
 
@@ -100,7 +100,6 @@ export const useUserStore = defineStore({
     async findUserByEmail(email) {
       try {
         const res = await AuthApi.getUserByEmail({ email });
-        console.log(res.data);
         return res.data;
       } catch (error) {
         throw new Error(error);
