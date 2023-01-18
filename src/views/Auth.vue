@@ -8,6 +8,8 @@ export default {
     return {
       email: "",
       password: "",
+      firstname: "",
+      lastname: "",
       sitekey: import.meta.env.VITE_CAPTCHA_SITEKEY,
     };
   },
@@ -19,37 +21,52 @@ export default {
       const { login } = useUserStore();
       login(this.email, this.password)
         .then((res) => {
-          this.$router.push(`/uid=${this.user.id}/section=inbox`);
+          this.$router.push(`/uid=${this.user.id}`);
         })
         .catch((err) => {
+          console.log(err);
           this.makeInputInvalid(
-            document.getElementById("password-form"),
-            "Incorrect password"
+            document.getElementById("password-form", "Incorrect password")
           );
+        });
+    },
+    async onRegister() {
+      const { register } = useUserStore();
+
+      register(this.email, this.firstname, this.lastname, this.password)
+        .then((res) => {
+          if (this.user) {
+            this.$router.push(`/uid=${this.user.id}`);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
     goBack() {
       window.history.go(-1);
       return false;
     },
-    async checkEmail() {
+    async findUserWithEmail() {
       try {
         const { findUserByEmail } = useUserStore();
-
-        if (!this.email) {
-          this.makeInputInvalid(
-            document.getElementById("email-form", "This input cannot be blank")
-          );
-        }
-
         const user = await findUserByEmail(this.email);
-        if (user) this.$router.push("/login");
-      } catch (error) {
-        this.makeInputInvalid(
-          document.getElementById("email-form"),
-          "User with this email does not exist"
-        );
+
+        console.log(user);
+        return user;
+      } catch (error) {}
+    },
+    async checkEmail() {
+      const form = document.getElementById("email-form");
+      if (!this.email) {
+        this.makeInputInvalid(form, "This input cannot be blank");
+        return false;
       }
+
+      const user = await this.findUserWithEmail();
+
+      if (user) this.$router.push("/login");
+      else this.makeInputInvalid(form, "User with this email does not exist");
     },
     makeInputInvalid(form, error) {
       const input = form.querySelector("input");
@@ -158,19 +175,15 @@ export default {
               v-model="password"
             />
             <vue-recaptcha ref="recaptcha" :sitekey="sitekey" class="captcha" />
-            <router-link
-              to="/register"
-              @click="onLogin"
-              class="auth-box__button _blue"
-            >
+            <button @click.prevent="onRegister" class="auth-box__button _blue">
               Register
-            </router-link>
+            </button>
           </form>
           <div v-else>
             <v-progress-circular
               :size="50"
               :width="7"
-              color="primary"
+              color="#1374e9"
               indeterminate
             ></v-progress-circular>
           </div>
@@ -183,7 +196,7 @@ export default {
 
 <style lang="scss" scoped>
 .auth {
-  background-image: url("https://i.pinimg.com/originals/b1/02/dc/b102dcda56577ee8b860b89dadf0f4c0.jpg");
+  background-image: url("../assets/background.jpg");
   background-size: cover;
   display: flex;
   align-items: center;
