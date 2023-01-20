@@ -10,67 +10,55 @@ export default {
       password: "",
       firstname: "",
       lastname: "",
-      sitekey: import.meta.env.VITE_CAPTCHA_SITEKEY,
     };
   },
   computed: {
     ...mapState(useUserStore, ["user"]),
   },
   methods: {
-    async onLogin() {
+    async onLogin(event) {
       const { login } = useUserStore();
-      login(this.email, this.password)
-        .then((res) => {
-          this.$router.push(`/uid=${this.user.id}`);
-        })
-        .catch((err) => {
-          console.log(err);
-          this.makeInputInvalid(
-            document.getElementById("password-form", "Incorrect password")
-          );
-        });
+      const form = this.$refs.passwordForm;
+      const input = form.querySelector("input");
+      const isBlank = this.checkBlank(input);
+
+      if (!isBlank) {
+        login(this.email, this.password)
+          .then((res) => {
+            this.$router.push(`/uid=${this.user.id}/section=inbox`);
+          })
+          .catch((err) => {
+            console.log(err);
+
+            this.makeInputInvalid(input, "Incorrect password");
+          });
+      }
     },
     async onRegister() {
       const { register } = useUserStore();
-
-      register(this.email, this.firstname, this.lastname, this.password)
-        .then((res) => {
-          if (this.user) {
-            this.$router.push(`/uid=${this.user.id}`);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      if (this.validateRegistrationForm(this.$refs.registerForm)) {
+        register(this.email, this.firstname, this.lastname, this.password)
+          .then((res) => {
+            if (this.user) {
+              this.$router.push(`/uid=${this.user.id}/section=inbox`);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     },
-    goBack() {
-      window.history.go(-1);
-      return false;
-    },
-    async findUserWithEmail() {
+    async findUserWithEmail(email) {
       try {
         const { findUserByEmail } = useUserStore();
-        const user = await findUserByEmail(this.email);
-
-        console.log(user);
+        const user = await findUserByEmail(email);
         return user;
-      } catch (error) {}
-    },
-    async checkEmail() {
-      const form = document.getElementById("email-form");
-      if (!this.email) {
-        this.makeInputInvalid(form, "This input cannot be blank");
-        return false;
+      } catch (error) {
+        console.log(error);
       }
-
-      const user = await this.findUserWithEmail();
-
-      if (user) this.$router.push("/login");
-      else this.makeInputInvalid(form, "User with this email does not exist");
     },
-    makeInputInvalid(form, error) {
-      const input = form.querySelector("input");
-      const label = form.querySelector("label");
+    makeInputInvalid(input, error) {
+      const label = input.labels[0];
       label.innerText = error;
       input.classList.add("_error");
       label.style.display = "block";
@@ -82,6 +70,64 @@ export default {
         },
         { once: true }
       );
+    },
+    checkBlank(input) {
+      if (!input.value) {
+        this.makeInputInvalid(input, "This input cannot be blank");
+        return true;
+      }
+      return false;
+    },
+    async validateEmailOnLogin() {
+      const form = this.$refs.loginForm;
+      const emailInput = form.querySelector("input");
+      const isBlank = this.checkBlank(emailInput);
+
+      if (isBlank) {
+        return false;
+      }
+
+      const isEmailValid = await this.findUserWithEmail(emailInput.value);
+
+      if (isEmailValid) this.$router.push("/login");
+      else
+        this.makeInputInvalid(
+          emailInput,
+          "User with this email does not exist"
+        );
+    },
+    async validateEmailOnRegistration(event) {
+      const input = event.target;
+      const isBlank = this.checkBlank(input);
+
+      if (isBlank) {
+        return false;
+      }
+
+      const isEmailFound = await this.findUserWithEmail(input.value);
+
+      if (isEmailFound)
+        this.makeInputInvalid(input, "User with this email already exist");
+    },
+
+    validateRegistrationForm(form) {
+      const inputs = form.querySelectorAll("input");
+      return [...inputs].every((el) => !this.checkBlank(el));
+    },
+
+    validatePassword(event) {
+      if (event.target.value.length < 8) {
+        this.makeInputInvalid(
+          event.target,
+          "Password must contain at least 8 symbols"
+        );
+        return true;
+      }
+      return false;
+    },
+    goBack() {
+      window.history.go(-1);
+      return false;
     },
   },
   components: { VueRecaptcha },
@@ -106,6 +152,7 @@ export default {
             class="auth-box__content"
             key="default"
             id="email-form"
+            ref="loginForm"
           >
             <input
               class="auth-box__input"
@@ -115,8 +162,12 @@ export default {
               id="email"
             />
             <label for="email" class="auth-box__input__label"></label>
+
             <a href="" class="auth-box__input-tip">I don't remember</a>
-            <button @click.prevent="checkEmail" class="auth-box__button _blue">
+            <button
+              @click.prevent="validateEmailOnLogin"
+              class="auth-box__button _blue"
+            >
               Login
             </button>
             <router-link to="/register" class="auth-box__button">
@@ -128,12 +179,14 @@ export default {
             class="auth-box__content"
             key="login"
             id="password-form"
+            ref="passwordForm"
           >
             <input
               class="auth-box__input"
               type="password"
               placeholder="Password"
               v-model="password"
+              id="password"
             />
             <label for="password" class="auth-box__input__label"></label>
             <a href="" class="auth-box__input-tip">I don't remember</a>
@@ -149,32 +202,43 @@ export default {
             v-else-if="$route.path === '/register'"
             class="auth-box__content"
             key="register"
+            ref="registerForm"
           >
             <input
               class="auth-box__input"
               type="text"
               placeholder="Firstname"
               v-model="firstname"
+              id="firstname"
             />
+            <label for="firstname" class="auth-box__input__label"></label>
             <input
               class="auth-box__input"
               type="text"
               placeholder="Lastname"
               v-model="lastname"
+              id="lastname"
             />
+            <label for="lastname" class="auth-box__input__label"></label>
             <input
               class="auth-box__input"
               type="email"
               placeholder="Email"
               v-model="email"
+              id="email"
+              @change="validateEmailOnRegistration"
             />
+            <label for="email" class="auth-box__input__label"></label>
             <input
               class="auth-box__input"
               type="password"
               placeholder="Password"
               v-model="password"
+              id="password"
+              @change="validatePassword"
             />
-            <vue-recaptcha ref="recaptcha" :sitekey="sitekey" class="captcha" />
+            <label for="password" class="auth-box__input__label"></label>
+            <vue-recaptcha ref="recaptcha" sitekey="sitekey" class="captcha" />
             <button @click.prevent="onRegister" class="auth-box__button _blue">
               Register
             </button>
@@ -252,9 +316,7 @@ export default {
   font-size: 1.714em;
   border: solid 2px #5f6368;
   border-radius: 10px;
-  &:not(:last-child) {
-    margin-bottom: 10px;
-  }
+  margin-bottom: 10px;
   &._error {
     border-color: #ff0000;
     color: #ff0000;
@@ -264,6 +326,7 @@ export default {
   color: #ff0000;
   margin-right: auto;
   display: none;
+  padding: 0px 0px 7px 2px;
 }
 .auth-box__input-tip {
   margin: 10px 0 30px 0;
