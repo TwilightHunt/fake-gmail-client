@@ -33,7 +33,7 @@ const { user } = storeToRefs(useUserStore());
       <img src="../assets/icons/navigation/apps.svg" alt="apps" class="apps" />
       <router-link to="/profile">
         <avatar
-          :src="`http://localhost:8080/${user.profileImage}`"
+          :src="`${import.meta.env.VITE_BASE_URL}/${user.profileImage}`"
           :size="40"
         />
       </router-link>
