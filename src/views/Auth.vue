@@ -39,9 +39,7 @@ export default {
       if (this.validateRegistrationForm(this.$refs.registerForm)) {
         register(this.email, this.firstname, this.lastname, this.password)
           .then((res) => {
-            if (this.user) {
-              this.$router.push(`/uid=${this.user.id}/section=inbox`);
-            }
+            this.$router.push(`/uid=${this.user.id}/section=inbox`);
           })
           .catch((err) => {
             console.log(err);

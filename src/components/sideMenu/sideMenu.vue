@@ -2,7 +2,7 @@
   <div class="side-menu">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
-      Compose
+      <p>Compose</p>
     </button>
     <nav class="links">
       <Item
@@ -55,6 +55,11 @@ export default {
   text-transform: capitalize;
   background-color: #c2e7ff;
   margin: 8px;
+  transition: box-shadow 0.08s linear,
+    min-width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    box-shadow: 3px 3px 10px 4px #0002;
+  }
 }
 .links {
   display: flex;
