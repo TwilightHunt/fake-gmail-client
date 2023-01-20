@@ -24,11 +24,10 @@ DefaultApiInstanse.interceptors.response.use(
   (response) => response,
   (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 401) {
+    if (error.response.status === 401 && originalRequest.url !== "/refresh") {
       try {
         DefaultApiInstanse.get("/refresh").then((res) => {
           console.log(res);
-          console.log(originalRequest);
           localStorage.setItem("access_token", res.data.accessToken);
           DefaultApiInstanse.request({
             ...originalRequest,
