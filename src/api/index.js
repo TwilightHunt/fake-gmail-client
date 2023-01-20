@@ -28,6 +28,7 @@ DefaultApiInstanse.interceptors.response.use(
       try {
         DefaultApiInstanse.get("/refresh").then((res) => {
           console.log(res);
+          console.log(originRequest);
           localStorage.setItem("access_token", res.data.accessToken);
           DefaultApiInstanse.request({
             ...originalRequest,
