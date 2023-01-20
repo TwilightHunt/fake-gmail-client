@@ -43,7 +43,7 @@ export const useUserStore = defineStore({
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
           localStorage.setItem("access_token", res.data.token);
-          return this.user;
+          console.log(res);
         });
       } catch (error) {
         throw new Error(error);
