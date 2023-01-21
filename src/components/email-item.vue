@@ -4,6 +4,10 @@ import avatar from "./avatar.vue";
 const props = defineProps({
   info: Object,
 });
+
+const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
+  info.senter.profileImage
+}}`;
 </script>
 
 <template>
@@ -17,11 +21,7 @@ const props = defineProps({
           class="email-item__checkbox"
           @click.stop
         />
-        <avatar
-          class="email-item__icon"
-          :src="`http://localhost:8080/${info.senter.profileImage}`"
-          :size="40"
-        />
+        <avatar class="email-item__icon" :src="avatarURL" :size="40" />
         <div class="senter">
           {{ info.senter.firstname }} {{ info.senter.lastname }}
         </div>
