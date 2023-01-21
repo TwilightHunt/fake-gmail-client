@@ -3,7 +3,7 @@ import axios from "axios";
 const LoginApiInstanse = axios.create({
   withCredentials: true,
   credentials: "include",
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -13,7 +13,7 @@ const LoginApiInstanse = axios.create({
 const DefaultApiInstanse = axios.create({
   withCredentials: true,
   credentials: "include",
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -46,7 +46,7 @@ DefaultApiInstanse.interceptors.response.use(
 const UpdateApiInstanse = axios.create({
   withCredentials: true,
   credentials: "include",
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: `${import.meta.env.VITE_BASE_URL}/api`,
   headers: {
     "Content-Type": "application/form-data",
     "Access-Control-Allow-Origin": "*",

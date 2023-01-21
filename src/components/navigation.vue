@@ -4,7 +4,7 @@ import burger from "./burger.vue";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 
-const { user } = storeToRefs(useUserStore());
+const { user } = useUserStore();
 
 const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 </script>

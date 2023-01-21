@@ -6,8 +6,8 @@ const props = defineProps({
 });
 
 const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
-  info.senter.profileImage
-}}`;
+  props.info.senter.profileImage
+}`;
 </script>
 
 <template>
