@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu">
+  <div class="side-menu _closed">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
       <p>Compose</p>
@@ -41,10 +41,30 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .side-menu {
   margin-right: 16px;
-  width: 240px;
+  width: 12.5vw;
+  &._closed {
+    width: auto;
+    margin: 0;
+    & .link {
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      margin-left: 16px;
+      padding: 0;
+    }
+    & .button_compose p,
+    & .link .counter,
+    & .link .title {
+      display: none;
+    }
+    & .button_compose .icon_btn,
+    & .link .icon {
+      margin: 0 auto;
+    }
+  }
 }
 .button_compose {
   display: flex;

@@ -22,7 +22,6 @@ export const AuthApi = {
     return UpdateApiInstanse.put(url, data);
   },
   refresh() {
-    console.log(import.meta.env.VITE_BASE_URL);
     const url = "/refresh";
     return DefaultApiInstanse.get(url);
   },

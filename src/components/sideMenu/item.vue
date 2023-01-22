@@ -4,10 +4,8 @@
     class="link"
     :class="this.$route.params?.section === path ? '_active' : ''"
   >
-    <div class="title">
-      <icon :name="name" class="icon" />
-      {{ value }}
-    </div>
+    <icon :name="name" class="icon" />
+    <div class="title">{{ value }}</div>
     <div class="counter">{{ amount }}</div>
   </router-link>
 </template>
@@ -32,7 +30,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px 8px 26px;
+  padding: 0 12px 0 24px;
   border-radius: 0px 16px 16px 0px;
   &:hover {
     background-color: #ebecef;
@@ -48,11 +46,15 @@ export default {
   }
 }
 .title {
-  display: flex;
-  align-items: center;
-  column-gap: 19px;
+  margin-right: auto;
+  padding-left: 1vw;
 }
 .counter {
   font-size: 0.857em;
+}
+.icon {
+  padding: 8px 0;
+  min-width: 16px;
+  min-height: 32px;
 }
 </style>
