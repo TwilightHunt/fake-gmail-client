@@ -91,7 +91,22 @@ export default {
 }
 @media (max-width: 1129px) {
   .side-menu {
-    display: none;
+    position: absolute;
+    z-index: 15;
+    background-color: #fff;
+    width: 250px;
+    height: 100vh;
+    transform: translateX(0);
+    transition: transform 0.3s;
+    &._closed {
+      transform: translateX(-100%);
+    }
+    & .link {
+      height: 40px;
+      & .title {
+        padding-left: 10px;
+      }
+    }
   }
 }
 </style>
