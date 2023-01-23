@@ -64,6 +64,9 @@ export default {
         }
       });
     },
+    makeSideMenuClosed() {
+      this.$refs.sideMenu.$el.classList.toggle("_closed");
+    },
   },
   components: {
     Compose,
@@ -80,9 +83,12 @@ export default {
 
 <template>
   <div v-if="isAuth">
-    <Navigation />
+    <Navigation @hideSideMenu="makeSideMenuClosed" />
     <div class="content">
-      <SideMenu @changeComposeVisibility="changeComposeVisibility" />
+      <SideMenu
+        @changeComposeVisibility="changeComposeVisibility"
+        ref="sideMenu"
+      />
       <Mail v-if="$route.params.id" />
       <div v-else class="mails">
         <div class="mails__header">

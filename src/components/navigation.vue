@@ -1,8 +1,6 @@
 <script setup>
 import avatar from "./avatar.vue";
-import burger from "./burger.vue";
 import { useUserStore } from "../stores/user";
-import { storeToRefs } from "pinia";
 
 const { user } = useUserStore();
 
@@ -10,7 +8,9 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 </script>
 <template>
   <div class="navigation">
-    <burger style="margin: 0 17px 0 16px" />
+    <v-btn icon elevation="0" class="mr-4" @click="$emit('hideSideMenu')">
+      <v-icon color="#5F6368">mdi-menu</v-icon>
+    </v-btn>
     <img class="logo-img" src="../assets/logo.svg" alt="gmail" />
     <div class="search-input">
       <img

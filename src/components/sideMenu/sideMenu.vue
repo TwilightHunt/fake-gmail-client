@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu _closed">
+  <div class="side-menu">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
       <p>Compose</p>
