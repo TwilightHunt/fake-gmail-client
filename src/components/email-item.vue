@@ -13,7 +13,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
 <template>
   <router-link :to="`${$route.path}/mail=${info._id}`">
     <div class="email-item _container">
-      <div>
+      <div class="left">
         <input
           type="checkbox"
           name=""
@@ -21,16 +21,16 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
           class="email-item__checkbox"
           @click.stop
         />
-        <avatar class="email-item__icon" :src="avatarURL" :size="40" />
+        <avatar class="email-item__icon" :src="avatarURL" />
         <div class="senter">
           {{ info.senter.firstname }} {{ info.senter.lastname }}
         </div>
       </div>
-      <div>
-        <div class="email-item__title">
+      <div class="email-item__title">
+        <span class="email-item__topic">
           {{ info.topic ?? "< No topic >" }}
-          <span> - {{ info.message }} </span>
-        </div>
+        </span>
+        <span class="email-item__message"> - {{ info.message }} </span>
       </div>
     </div>
   </router-link>
@@ -39,11 +39,12 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
 <style scoped lang="scss">
 .email-item {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 50%;
   color: #000;
-  row-gap: 2rem;
+  column-gap: 1.5rem;
   border: solid 1px rgba(0, 0, 0, 0.05);
   padding: 0 20px;
+  overflow: hidden;
   & > div {
     display: inline-flex;
     align-items: center;
@@ -61,6 +62,8 @@ a {
   align-items: center;
   margin: 5px 0;
   margin-right: 15px;
+  width: 40px;
+  height: 40px;
 }
 .senter {
   font-weight: 600;
@@ -69,13 +72,20 @@ a {
   margin-right: 12px;
 }
 .email-item__title {
-  max-width: 3em;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   font-weight: 600;
-  & > span {
-    opacity: 0.5;
-    font-weight: 400;
+  max-width: 39vw;
+}
+.email-item__message {
+  opacity: 0.5;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+@media (max-width: 618px) {
+  .email-item__icon {
+    width: 30px;
+    height: 30px;
   }
 }
 </style>

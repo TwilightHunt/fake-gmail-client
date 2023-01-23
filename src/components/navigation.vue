@@ -8,7 +8,13 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 </script>
 <template>
   <div class="navigation">
-    <v-btn icon elevation="0" class="mr-4" @click="$emit('hideSideMenu')">
+    <v-btn
+      icon
+      elevation="0"
+      class="mr-4"
+      @click="$emit('hideSideMenu')"
+      color="#EEF3FC"
+    >
       <v-icon color="#5F6368">mdi-menu</v-icon>
     </v-btn>
     <img class="logo-img" src="../assets/logo.svg" alt="gmail" />
