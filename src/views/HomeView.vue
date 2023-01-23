@@ -113,7 +113,7 @@ export default {
               <icon name="options" class="icon" color="#5F6368" />
             </v-btn>
           </div>
-          <div class="right-side">
+          <div class="mails-header__navigation">
             <v-btn elevation="0" class="counter-text"> 1-50 of 9999 </v-btn>
             <v-btn icon elevation="0" class="action-btn _disabled">
               <v-icon color="#5F6368"> mdi-chevron-left </v-icon>
@@ -136,7 +136,7 @@ export default {
               />
               <label for="tab-1" class="tab-label">
                 <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
-                <span>Primary</span>
+                <span class="tab-title">Primary</span>
               </label>
               <div class="tab-content">
                 <div v-if="receivedMails.length > 0">
@@ -156,7 +156,7 @@ export default {
                 <v-icon color="#5F6368" class="tab-icon">
                   mdi-label-outline
                 </v-icon>
-                <span>Promotions</span>
+                <span class="tab-title">Promotions</span>
               </label>
               <div class="tab-content">
                 <Empty />
@@ -173,7 +173,7 @@ export default {
                 <v-icon color="#5F6368" class="tab-icon">
                   mdi-account-multiple-outline
                 </v-icon>
-                <span>Socials</span>
+                <span class="tab-title">Socials</span>
               </label>
               <div class="tab-content">
                 <Empty />
@@ -230,7 +230,7 @@ export default {
   justify-content: space-between;
 }
 .mails__body {
-  height: 84vh;
+  // min-height: 84vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -296,7 +296,7 @@ export default {
 .filter {
   position: relative;
   background: #fff;
-  height: 84vh;
+  min-height: 84vh;
 }
 .tab {
   float: left;
@@ -304,14 +304,17 @@ export default {
 .tab-switch {
   display: none;
 }
+.tab-title {
+  font-size: 1em;
+}
 .tab-label {
   position: relative;
   display: block;
   background: #fff;
   font-weight: 600;
   cursor: pointer;
-  padding: 16px;
-  width: 252px;
+  padding: 1em;
+  width: 15vw;
   top: 0;
   &:hover {
     background-color: #ebecef;
@@ -344,5 +347,14 @@ export default {
 .tab-switch._checked + label + .tab-content {
   z-index: 2;
   opacity: 1;
+}
+@media (max-width: 1129px) {
+  .right-side,
+  .mails__header {
+    display: none;
+  }
+  .tab-label {
+    width: 33.33vw;
+  }
 }
 </style>

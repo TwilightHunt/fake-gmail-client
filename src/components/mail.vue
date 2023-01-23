@@ -2,7 +2,13 @@
   <div class="mail">
     <header class="mail__header">
       <div class="tools">
-        <v-btn icon elevation="0" class="action-btn" style="margin-right: 36px">
+        <v-btn
+          icon
+          elevation="0"
+          class="action-btn"
+          style="margin-right: 36px"
+          @click="goBack"
+        >
           <Icon name="backwards-arrow" class="icon" color="#333333" />
         </v-btn>
         <div class="btn-group">
@@ -119,6 +125,12 @@ export default {
     ...mapStores(useMailsStore, ["getMailById"]),
     mail() {
       return this.mailsStore.getMailById(this.$route.params.id);
+    },
+  },
+  methods: {
+    goBack() {
+      window.history.go(-1);
+      return false;
     },
   },
 };

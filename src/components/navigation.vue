@@ -26,13 +26,21 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
       />
     </div>
     <div class="tools">
-      <img src="../assets/icons/navigation/help.svg" alt="help" class="help" />
+      <img
+        src="../assets/icons/navigation/help.svg"
+        alt="help"
+        class="help tool-btn"
+      />
       <img
         src="../assets/icons/navigation/settings.svg"
         alt="settings"
-        class="settings"
+        class="settings tool-btn"
       />
-      <img src="../assets/icons/navigation/apps.svg" alt="apps" class="apps" />
+      <img
+        src="../assets/icons/navigation/apps.svg"
+        alt="apps"
+        class="apps tool-btn"
+      />
       <router-link to="/profile">
         <avatar :src="avatarURL" :size="40" />
       </router-link>
@@ -73,6 +81,18 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 }
 .logo-img {
   cursor: pointer;
-  margin-right: 95px;
+  margin-right: clamp(10px, 5%, 100px);
+}
+@media (max-width: 618px) {
+  .tool-btn,
+  .logo-img {
+    display: none;
+  }
+  .tools {
+    margin-left: 10px;
+  }
+  .search {
+    width: 75vw;
+  }
 }
 </style>

@@ -45,7 +45,7 @@ export default {
 .side-menu {
   margin-right: 16px;
   width: 12.5vw;
-  &._closed {
+  &._closed:not(:hover) {
     width: auto;
     margin: 0;
     & .link {
@@ -88,5 +88,10 @@ export default {
 }
 .icon_btn {
   margin-right: 16px;
+}
+@media (max-width: 1129px) {
+  .side-menu {
+    display: none;
+  }
 }
 </style>
