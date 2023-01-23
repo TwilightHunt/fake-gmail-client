@@ -306,6 +306,7 @@ export default {
 }
 .tab-title {
   font-size: 1em;
+  text-overflow: ellipsis;
 }
 .tab-label {
   position: relative;
@@ -355,6 +356,11 @@ export default {
   }
   .tab-label {
     width: 33.33vw;
+  }
+}
+@media (max-width: 440px) {
+  .tab-icon {
+    display: none;
   }
 }
 </style>

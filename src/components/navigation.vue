@@ -58,7 +58,6 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   background: #eef3fc;
   border-radius: 8px;
   width: 37.6vw;
-  min-width: 256px;
   padding: 15px 57px;
 }
 .search-input {
@@ -88,11 +87,22 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   .logo-img {
     display: none;
   }
+  .navigation {
+    justify-content: space-between;
+  }
   .tools {
     margin-left: 10px;
   }
+  .search-input {
+    flex: 1;
+  }
   .search {
-    width: 75vw;
+    width: 100%;
+  }
+}
+@media (max-width: 486px) {
+  .tools {
+    display: none;
   }
 }
 </style>
