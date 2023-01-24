@@ -56,7 +56,7 @@
     </header>
     <div class="mail__title">
       <div>
-        <span>{{ mail.topic ?? "< No topic >" }}</span>
+        <span>{{ mail.topic || "< No topic >" }}</span>
         <icon name="label" class="icon" color="#333333" />
       </div>
       <div>

@@ -28,7 +28,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
       </div>
       <div class="email-item__title">
         <span class="email-item__topic">
-          {{ info.topic ?? "< No topic >" }}
+          {{ info.topic || "< No topic >" }}
         </span>
         <span class="email-item__message"> - {{ info.message }} </span>
       </div>
