@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu">
+  <div class="side-menu" v-click-outside="$emit('hideSideMenu')">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
       <p>Compose</p>

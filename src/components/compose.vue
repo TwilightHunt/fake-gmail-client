@@ -4,13 +4,13 @@
       <div class="title">New message</div>
       <div class="tools">
         <div class="tool">
-          <v-icon color="#202124" class="icon" size="16">
+          <v-icon color="#202124" class="icon icon-minimize" size="16">
             mdi-window-minimize
           </v-icon>
-          <v-icon color="#202124" class="icon" size="16">
+          <v-icon color="#202124" class="icon icon-expand" size="16">
             mdi-arrow-expand
           </v-icon>
-          <v-icon color="#202124" class="icon" size="16">
+          <v-icon color="#202124" class="icon icon-close" size="16">
             mdi-close-thick
           </v-icon>
         </div>
@@ -188,5 +188,21 @@ export default {
   border-radius: 0 18px 18px 0;
   border-left: 1px solid #062e6f;
   padding: 0 7px;
+}
+@media (max-width: 1129px) {
+  .compose {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 100vw;
+    margin: 0;
+  }
+  .icon-minimize,
+  .icon-expand {
+    display: none;
+  }
 }
 </style>
