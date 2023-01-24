@@ -201,19 +201,19 @@ export default {
     font-weight: 600;
     line-height: 143%;
     letter-spacing: 0.02px;
-    color: #1f1f1f;
+    color: var(--text-black-color);
   }
   & .email {
     font-size: 0.857rem;
     line-height: 116%;
     letter-spacing: 0.02em;
-    color: #5f6368;
+    color: var(--items-gray-color);
   }
   & .unsubscribe {
     font-size: 0.857rem;
     line-height: 116%;
     letter-spacing: -0.02em;
-    color: #5f6368;
+    color: var(--items-gray-color);
   }
 }
 .right-side {
@@ -247,7 +247,7 @@ export default {
   margin-top: 20%;
   font-size: 3rem;
   line-height: 120%;
-  color: #202124;
+  color: var(--side-menu-gray);
   opacity: 0.16;
 }
 </style>

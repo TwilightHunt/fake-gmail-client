@@ -127,7 +127,7 @@ export default {
 }
 .header {
   cursor: pointer;
-  background-color: #eef3fc;
+  background-color: var(--deep-bg-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -165,7 +165,7 @@ export default {
 }
 .send-button {
   & button {
-    background-color: #0b57d0;
+    background-color: var(--items-blue-color);
     color: #fff;
     height: 36px;
   }

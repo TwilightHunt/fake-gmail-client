@@ -13,7 +13,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
       elevation="0"
       class="mr-4"
       @click="$emit('hideSideMenu')"
-      color="#EEF3FC"
+      color="#f6f8fc"
     >
       <v-icon color="#5F6368">mdi-menu</v-icon>
     </v-btn>
@@ -64,7 +64,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   align-items: center;
 }
 .search {
-  background: #eef3fc;
+  background: var(--deep-bg-color);
   border-radius: 8px;
   width: 37.6vw;
   padding: 15px 57px;

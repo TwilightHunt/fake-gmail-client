@@ -312,7 +312,7 @@ export default {
   padding: 2px 16px;
   height: 54px;
   font-size: 1.714em;
-  border: solid 2px #5f6368;
+  border: solid 2px var(--items-gray-color);
   border-radius: 10px;
   margin-bottom: 10px;
   &._error {
@@ -335,11 +335,11 @@ export default {
   border-radius: 10px;
   font-size: 1.142em;
   padding: 14px 0;
-  border: 1px solid #1374e9;
-  color: #1374e9;
+  border: 1px solid var(--light-blue-color);
+  color: var(--light-blue-color);
   &._blue {
     border-color: transparent;
-    background-color: #1374e9;
+    background-color: var(--light-blue-color);
     color: #fff;
   }
   &:not(:last-child) {

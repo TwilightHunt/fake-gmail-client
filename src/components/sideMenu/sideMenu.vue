@@ -41,7 +41,7 @@ export default {
   methods: {
     close(event) {
       const navigation = document.querySelector(".navigation");
-      if (!navigation.contains(event.target)) {
+      if (!navigation.contains(event.target) && window.screen.width <= 1129) {
         document.querySelector(".side-menu").classList.add("_closed");
       }
     },

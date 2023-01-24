@@ -26,6 +26,16 @@ export default {
 </script>
 
 <style>
+:root {
+  --main-bg-color: #f6f8fc;
+  --deep-bg-color: #eef3fc;
+  --items-blue-color: #0b57d0;
+  --light-blue-color: #1374e9;
+  --items-black-color: #333333;
+  --text-black-color: #1f1f1f;
+  --items-gray-color: #5f6368;
+  --side-menu-gray: #202124;
+}
 @font-face {
   font-family: "Google Sans";
   src: url("./fonts/GoogleSans-Regular.ttf") format("truetype");
@@ -49,6 +59,6 @@ body {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 114%;
-  background-color: #f6f8fc;
+  background-color: var(--main-bg-color);
 }
 </style>

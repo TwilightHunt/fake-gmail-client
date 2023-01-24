@@ -249,7 +249,7 @@ export default {
 }
 .v-btn {
   &.counter-text {
-    color: #5f6368;
+    color: var(--items-gray-color);
     font-size: 0.75em;
     font-family: "Google Sans";
   }
@@ -319,11 +319,11 @@ export default {
   }
 }
 .tab-switch._checked + .tab-label {
-  color: #1374e9;
+  color: var(--light-blue-color);
   &::after {
     content: "";
     position: absolute;
-    background-color: #1374e9;
+    background-color: var(--light-blue-color);
     bottom: 0;
     left: 5%;
     width: 90%;
