@@ -1,10 +1,10 @@
 <template>
-  <div class="side-menu" v-click-outside="$emit('hideSideMenu')">
+  <div class="side-menu" v-click-outside="close">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
       <p>Compose</p>
     </button>
-    <nav class="links">
+    <nav class="links" @click="close">
       <Item
         :path="'inbox'"
         :name="'inbox'"
@@ -38,6 +38,14 @@ import Icon from "../iconfont.vue";
 
 export default {
   components: { Item, Icon },
+  methods: {
+    close(event) {
+      const navigation = document.querySelector(".navigation");
+      if (!navigation.contains(event.target)) {
+        document.querySelector(".side-menu").classList.add("_closed");
+      }
+    },
+  },
 };
 </script>
 
