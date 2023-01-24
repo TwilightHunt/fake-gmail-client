@@ -30,6 +30,9 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
         src="../assets/icons/navigation/options.svg"
         alt="search"
       />
+      <router-link to="/profile">
+        <avatar :src="avatarURL" :size="30" class="search-avatar" />
+      </router-link>
     </div>
     <div class="tools">
       <img
@@ -84,6 +87,9 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   display: flex;
   column-gap: 20px;
 }
+.search-avatar {
+  display: none;
+}
 .logo-img {
   cursor: pointer;
   margin-right: clamp(10px, 5%, 100px);
@@ -107,8 +113,15 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   }
 }
 @media (max-width: 486px) {
+  .options,
   .tools {
     display: none;
+  }
+  .search-avatar {
+    position: absolute;
+    display: block;
+    top: 8px;
+    right: 17px;
   }
 }
 </style>

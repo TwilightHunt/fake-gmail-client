@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu" v-click-outside="close">
+  <div class="side-menu _closed" v-click-outside="close">
     <button class="button_compose" @click="$emit('changeComposeVisibility')">
       <icon name="pen" class="icon_btn" />
       <p>Compose</p>
@@ -103,7 +103,8 @@ export default {
     z-index: 15;
     background-color: #fff;
     width: 250px;
-    height: 100vh;
+    bottom: 0;
+    top: 64px;
     transform: translateX(0);
     transition: transform 0.3s;
     &._closed {
