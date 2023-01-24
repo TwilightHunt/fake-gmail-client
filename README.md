@@ -1,6 +1,6 @@
-# u-mail
+# fake-gmail
 
-This template should help get you started developing with Vue 3 in Vite.
+The client side of the fullstack clone of Google Mail (actually works like a social network application).
 
 ## Recommended IDE Setup
 
