@@ -1,5 +1,5 @@
 <template>
-  <div class="mail">
+  <div v-if="width >= 800" class="mail">
     <header class="mail__header">
       <div class="tools">
         <v-btn
@@ -106,6 +106,7 @@
     <div v-if="mail.message" class="mail__message">{{ mail.message }}</div>
     <div v-else class="mail__empty-content">Place for your email content</div>
   </div>
+  <MailMobile v-else />
 </template>
 
 <script>
@@ -113,14 +114,16 @@ import Icon from "../components/iconfont.vue";
 import { mapStores } from "pinia";
 import { useMailsStore } from "../stores/mails";
 import avatar from "./avatar.vue";
+import MailMobile from "./mail-mobile.vue";
 
 export default {
   data() {
     return {
       mail: {},
+      width: 0,
     };
   },
-  components: { Icon, avatar },
+  components: { Icon, avatar, MailMobile },
   computed: {
     ...mapStores(useMailsStore, ["getMailById"]),
     mail() {
@@ -132,6 +135,16 @@ export default {
       window.history.go(-1);
       return false;
     },
+    handleResize() {
+      this.width = window.innerWidth;
+    },
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>

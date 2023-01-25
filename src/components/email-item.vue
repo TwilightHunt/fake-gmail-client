@@ -1,13 +1,18 @@
-<script setup>
+<script>
 import avatar from "./avatar.vue";
 
-const props = defineProps({
-  info: Object,
-});
-
-const avatarURL = `${import.meta.env.VITE_BASE_URL}/${
-  props.info.senter.profileImage
-}`;
+export default {
+  data() {
+    return {
+      avatarURL: `${import.meta.env.VITE_BASE_URL}/${
+        this.info.senter.profileImage
+      }`,
+    };
+  },
+  props: {
+    info: Object,
+  },
+};
 </script>
 
 <template>
