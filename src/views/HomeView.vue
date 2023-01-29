@@ -354,6 +354,9 @@ export default {
   .tab-label {
     width: 33.33vw;
   }
+  .mails {
+    border-radius: 0;
+  }
 }
 @media (max-width: 440px) {
   .tab-icon {
