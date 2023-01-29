@@ -57,6 +57,7 @@ export default {
 }
 .email-item__avatar {
   margin-right: 15px;
+  flex: 0 0 auto;
 }
 .email-item__content {
   width: 100%;
