@@ -12,6 +12,7 @@ export default {
   props: {
     info: Object,
   },
+  components: { avatar },
 };
 </script>
 
@@ -32,10 +33,10 @@ export default {
         </div>
       </div>
       <div class="email-item__title">
-        <span class="email-item__topic">
+        <div class="email-item__topic">
           {{ info.topic || "< No topic >" }}
-        </span>
-        <span class="email-item__message"> - {{ info.message }} </span>
+        </div>
+        <div class="email-item__message">- {{ info.message }}</div>
       </div>
     </div>
   </router-link>
@@ -44,7 +45,8 @@ export default {
 <style scoped lang="scss">
 .email-item {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
+  min-width: 0px;
   color: #000;
   column-gap: 1.5rem;
   border: solid 1px rgba(0, 0, 0, 0.05);
@@ -53,7 +55,6 @@ export default {
   & > div {
     display: inline-flex;
     align-items: center;
-    justify-self: start;
   }
   &:hover {
     border: solid 1px rgba(0, 0, 0, 0.1);
@@ -78,14 +79,20 @@ a {
 }
 .email-item__title {
   font-weight: 600;
-  max-width: 39vw;
+  overflow: hidden;
+  word-break: break-all;
+  white-space: nowrap;
 }
 .email-item__message {
   opacity: 0.5;
   font-weight: 400;
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+}
+@media (max-width: 1129px) {
+  .email-item__checkbox {
+    display: none;
+  }
 }
 @media (max-width: 618px) {
   .email-item__icon {
