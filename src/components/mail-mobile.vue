@@ -47,7 +47,7 @@
             <span class="mail-info__senter"
               >{{ mail.senter.firstname }} {{ mail.senter.lastname }}</span
             >
-            <span class="mail-info__date">{{ mail.date }}</span>
+            <span class="mail-info__date">{{ convertDate(mail.date) }}</span>
           </div>
           <a class="mail-info__receiver-button">to me</a>
           <v-icon color="#333333" class="mail-info__receiver-icon" size="15">
@@ -96,6 +96,10 @@ export default {
     goBack() {
       window.history.go(-1);
       return false;
+    },
+    convertDate(stringDate) {
+      const date = new Date(stringDate);
+      return date.toLocaleDateString("en-US");
     },
   },
 };

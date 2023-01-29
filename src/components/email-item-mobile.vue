@@ -8,7 +8,7 @@
         </div>
         <v-icon color="#5F6368">mdi-attachment</v-icon>
         <div class="email-item__content__date mail-head__date">
-          {{ info.date }}
+          {{ convertDate(info.date) }}
         </div>
       </div>
       <div class="email-item__content__topic">
@@ -34,6 +34,15 @@ export default {
   },
   props: {
     info: Object,
+  },
+  methods: {
+    convertDate(stringDate) {
+      const date = new Date(stringDate);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+    },
   },
   components: { avatar },
 };
@@ -87,5 +96,9 @@ export default {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   margin-right: 26px;
+}
+.mail-head__date {
+  font-size: 0.875em;
+  padding-left: 5px;
 }
 </style>

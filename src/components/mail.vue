@@ -91,7 +91,7 @@
         </div>
       </div>
       <div class="right-side">
-        <span class="date">{{ mail.date }}</span>
+        <span class="date">{{ convertDate(mail.date) }}</span>
         <v-btn icon elevation="0" class="action-btn">
           <icon name="star" class="icon" color="#333333" />
         </v-btn>
@@ -137,6 +137,19 @@ export default {
     },
     handleResize() {
       this.width = window.innerWidth;
+    },
+    convertDate(stringDate) {
+      const date = new Date(stringDate);
+      const localDate = date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      });
+      const localTime = date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      return `${localDate}, ${localTime}`;
     },
   },
   created() {

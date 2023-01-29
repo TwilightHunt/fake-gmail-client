@@ -1,3 +1,30 @@
+<template>
+  <router-link :to="`${$route.path}/mail=${info._id}`">
+    <div v-if="width > 618" class="email-item _container">
+      <div class="left">
+        <input
+          type="checkbox"
+          name=""
+          id=""
+          class="email-item__checkbox"
+          @click.stop
+        />
+        <avatar class="email-item__icon" :src="avatarURL" />
+        <div class="senter">
+          {{ info.senter.firstname }} {{ info.senter.lastname }}
+        </div>
+      </div>
+      <div class="email-item__title">
+        <div class="email-item__topic">
+          {{ info.topic || "< No topic >" }}
+        </div>
+        <div class="email-item__message">- {{ info.message }}</div>
+      </div>
+    </div>
+    <Mobile :info="info" v-else />
+  </router-link>
+</template>
+
 <script>
 import avatar from "./avatar.vue";
 import Mobile from "./email-item-mobile.vue";
@@ -29,33 +56,6 @@ export default {
   components: { avatar, Mobile },
 };
 </script>
-
-<template>
-  <router-link :to="`${$route.path}/mail=${info._id}`">
-    <div v-if="width > 618" class="email-item _container">
-      <div class="left">
-        <input
-          type="checkbox"
-          name=""
-          id=""
-          class="email-item__checkbox"
-          @click.stop
-        />
-        <avatar class="email-item__icon" :src="avatarURL" />
-        <div class="senter">
-          {{ info.senter.firstname }} {{ info.senter.lastname }}
-        </div>
-      </div>
-      <div class="email-item__title">
-        <div class="email-item__topic">
-          {{ info.topic || "< No topic >" }}
-        </div>
-        <div class="email-item__message">- {{ info.message }}</div>
-      </div>
-    </div>
-    <Mobile :info="info" v-else />
-  </router-link>
-</template>
 
 <style scoped lang="scss">
 .email-item {
