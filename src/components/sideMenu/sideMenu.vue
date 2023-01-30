@@ -9,22 +9,22 @@
         :path="'inbox'"
         :name="'inbox'"
         :value="'Inbox'"
-        :amount="311"
+        :amount="mailsStore.getSortedReceivedMails.length"
         class="_bold"
       />
       <Item :path="'starred'" :name="'star'" :value="'Starred'" />
       <Item :path="'snoozed'" :name="'clocks'" :value="'Snoozed'" />
       <Item :path="'important'" :name="'importnat'" :value="'Imoprtant'" />
       <Item :path="'chats'" :name="'chat'" :value="'Chats'" />
-      <Item :path="'sent'" :name="'sent'" :value="'Sent'" />
-      <Item :path="'drafts'" :name="'draft'" :value="'Drafts'" />
       <Item
-        :path="'spam'"
-        :name="'spam'"
-        :value="'Spam'"
-        :amount="311"
+        :path="'sent'"
+        :name="'sent'"
+        :value="'Sent'"
+        :amount="mailsStore.getSortedSentMails.length"
         class="_bold"
       />
+      <Item :path="'drafts'" :name="'draft'" :value="'Drafts'" />
+      <Item :path="'spam'" :name="'spam'" :value="'Spam'" />
       <Item :path="'all'" :name="'mail'" :value="'All mail'" />
       <Item :path="'bin'" :name="'bin'" :value="'Bin'" />
       <Item :path="'more'" :name="'down-arrow'" :value="'More'" />
@@ -35,6 +35,8 @@
 <script>
 import Item from "./item.vue";
 import Icon from "../iconfont.vue";
+import { mapStores } from "pinia";
+import { useMailsStore } from "../../stores/mails";
 
 export default {
   components: { Item, Icon },
@@ -45,6 +47,9 @@ export default {
         document.querySelector(".side-menu").classList.add("_closed");
       }
     },
+  },
+  computed: {
+    ...mapStores(useMailsStore),
   },
 };
 </script>
