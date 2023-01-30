@@ -1,5 +1,5 @@
 <template>
-  <div class="empty">There are no mails here</div>
+  <div class="empty"><p>There are no mails here</p></div>
 </template>
 
 <script>
@@ -8,12 +8,15 @@ export default {};
 
 <style lang="scss" scoped>
 .empty {
-  text-align: center;
   font-weight: 600;
-  margin-top: 20%;
   font-size: 3rem;
   line-height: 120%;
   color: #202124;
   opacity: 0.16;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 </style>
