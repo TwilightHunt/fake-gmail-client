@@ -82,7 +82,7 @@ export default {
 </script>
 
 <template>
-  <div v-if="isAuth">
+  <div v-if="isAuth" class="wrapper">
     <Navigation @hideSideMenu="hideSideMenu" />
     <div class="content">
       <SideMenu @changeComposeVisibility="changeComposeVisibility" />
@@ -206,6 +206,11 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/mixins/scrollbar.scss";
 @include scrollbar;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .content {
   display: flex;
   flex-grow: 1;
@@ -227,7 +232,7 @@ export default {
   justify-content: space-between;
 }
 .mails__body {
-  // min-height: 84vh;
+  height: calc(100vh - 150px);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -293,7 +298,6 @@ export default {
 .filter {
   position: relative;
   background: #fff;
-  min-height: 84vh;
 }
 .tab {
   float: left;
@@ -356,6 +360,10 @@ export default {
   }
   .mails {
     border-radius: 0;
+    height: calc(100vh - 64px);
+  }
+  .mails__body {
+    height: calc(100vh - 64px);
   }
 }
 @media (max-width: 440px) {
