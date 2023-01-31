@@ -70,7 +70,7 @@
     </div>
     <div class="mail__info">
       <avatar
-        :src="`http://localhost:8080/${mail.senter.profileImage}`"
+        :src="`${baseURL}/${mail.senter.profileImage}`"
         :size="40"
         class="mail__senter"
       />
@@ -121,6 +121,7 @@ export default {
     return {
       mail: {},
       width: 0,
+      baseURL: import.meta.env.VITE_BASE_URL,
     };
   },
   components: { Icon, avatar, MailMobile },

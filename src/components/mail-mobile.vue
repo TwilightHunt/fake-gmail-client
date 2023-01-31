@@ -38,7 +38,7 @@
       </div>
       <div class="mail-body__info">
         <avatar
-          :src="`http://localhost:8080/${mail.senter.profileImage}`"
+          :src="`${baseURL}/${mail.senter.profileImage}`"
           :size="40"
           class="mail__senter"
         />
@@ -83,6 +83,7 @@ export default {
   data() {
     return {
       mail: {},
+      baseURL: import.meta.env.VITE_BASE_URL,
     };
   },
   computed: {
