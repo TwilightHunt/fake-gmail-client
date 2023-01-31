@@ -35,6 +35,7 @@ export default {
   --text-black-color: #1f1f1f;
   --items-gray-color: #5f6368;
   --side-menu-gray: #202124;
+  --titles-color: #212121;
 }
 @font-face {
   font-family: "Google Sans";

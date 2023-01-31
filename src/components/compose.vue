@@ -40,18 +40,20 @@
     </form>
     <footer class="footer">
       <div class="send-button">
-        <button class="button-text" @click="sendMessage">Send</button>
+        <button class="button-text" @click="onSend">Send</button>
         <button class="button-icon">
           <v-icon color="#fff"> mdi-menu-down </v-icon>
         </button>
       </div>
     </footer>
+    <popup v-if="hasError" :message="errorMessage" @close="closeErrorPopup" />
   </div>
 </template>
 
 <script>
 import { useMailsStore } from "../stores/mails";
 import { useUserStore } from "../stores/user.js";
+import popup from "./popup.vue";
 
 export default {
   data() {
@@ -59,6 +61,8 @@ export default {
       message: "",
       receiver: "",
       topic: "",
+      hasError: false,
+      errorMessage: "",
     };
   },
   methods: {
@@ -91,7 +95,27 @@ export default {
         });
       }
     },
+    async onSend() {
+      if (!this.receiver) {
+        this.errorMessage = "Please specify at least one recipient.";
+        this.hasError = true;
+        return false;
+      }
+      try {
+        await useUserStore().findUserByEmail(this.receiver);
+        this.sendMessage();
+      } catch (error) {
+        console.log(error);
+        this.errorMessage = "User with this email does not exist.";
+        this.hasError = true;
+        return false;
+      }
+    },
+    closeErrorPopup() {
+      this.hasError = false;
+    },
   },
+  components: { popup },
 };
 </script>
 
