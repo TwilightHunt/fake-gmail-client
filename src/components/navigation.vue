@@ -1,11 +1,13 @@
 <script setup>
 import avatar from "./avatar.vue";
 import { useUserStore } from "../stores/user";
+import Icon from "../components/iconfont.vue";
 
 const { user } = useUserStore();
 
 const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 </script>
+
 <template>
   <div class="navigation">
     <v-btn
@@ -35,23 +37,37 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
       </router-link>
     </div>
     <div class="tools">
-      <img
-        src="../assets/icons/navigation/help.svg"
-        alt="help"
-        class="help tool-btn"
-      />
-      <img
-        src="../assets/icons/navigation/settings.svg"
-        alt="settings"
-        class="settings tool-btn"
-      />
-      <img
-        src="../assets/icons/navigation/apps.svg"
-        alt="apps"
-        class="apps tool-btn"
-      />
+      <v-btn
+        icon
+        elevation="0"
+        color="#f6f8fc"
+        class="tools__button action-btn"
+      >
+        <icon size="20" name="help" class="icon tools__icon" color="#5F6368" />
+      </v-btn>
+      <v-btn
+        icon
+        elevation="0"
+        color="#f6f8fc"
+        class="tools__button action-btn"
+      >
+        <icon
+          size="20"
+          name="settings"
+          class="icon tools__icon"
+          color="#5F6368"
+        />
+      </v-btn>
+      <v-btn
+        icon
+        elevation="0"
+        color="#f6f8fc"
+        class="tools__button action-btn"
+      >
+        <icon size="16" name="apps" class="icon tools__icon" color="#5F6368" />
+      </v-btn>
       <router-link to="/profile">
-        <avatar :src="avatarURL" :size="40" />
+        <avatar :src="avatarURL" :size="40" class="avatar" />
       </router-link>
     </div>
   </div>
@@ -85,7 +101,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 .tools {
   margin-left: auto;
   display: flex;
-  column-gap: 20px;
+  align-items: center;
 }
 .search-avatar {
   display: none;
@@ -93,6 +109,14 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 .logo-img {
   cursor: pointer;
   margin-right: clamp(10px, 5%, 100px);
+}
+.v-btn.tools__button {
+  width: 38px;
+  height: 38px;
+  margin: 2px;
+}
+.avatar {
+  margin-left: 10px;
 }
 @media (max-width: 618px) {
   .tool-btn,
