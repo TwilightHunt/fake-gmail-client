@@ -123,7 +123,7 @@ export default {
 .compose {
   z-index: 10;
   position: absolute;
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   width: 32.125vw;
   min-height: 61vh;
   right: 4.5rem;
@@ -164,7 +164,7 @@ export default {
   width: 16px;
   height: 16px;
   &:hover {
-    background-color: #dadcdf;
+    background-color: var(--sections-bg-color-hover);
   }
 }
 .tools {

@@ -166,7 +166,7 @@ export default {
 <style lang="scss" scoped>
 .mail {
   flex: 1;
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   border-radius: 16px;
   overflow-x: hidden;
   height: 84vh;

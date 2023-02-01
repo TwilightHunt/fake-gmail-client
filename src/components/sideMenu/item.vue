@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .link {
-  color: #202124;
+  color: var(--secondary-text-color);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -33,10 +33,10 @@ export default {
   padding: 0 12px 0 24px;
   border-radius: 0px 16px 16px 0px;
   &:hover {
-    background-color: #ebecef;
+    background-color: var(--side-items-hover);
   }
   &._active {
-    background-color: #d3e2fd;
+    background-color: var(--side-items-active);
   }
   &._bold {
     & > .title,

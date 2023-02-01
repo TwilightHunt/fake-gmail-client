@@ -14,7 +14,11 @@
     <div class="settings__content">
       <div class="settings__theme">
         <label class="settings__theme__switch">
-          <input type="checkbox" class="settings__theme__checkbox" />
+          <input
+            type="checkbox"
+            class="settings__theme__checkbox"
+            @change="changeTheme"
+          />
           <span class="settings__theme__slider"></span>
         </label>
         <div class="settings__theme__title">Dark Mode</div>
@@ -27,6 +31,27 @@
 export default {
   data() {
     return {};
+  },
+  methods: {
+    changeTheme() {
+      const body = document.body;
+      if (!body.getAttribute("data-theme")) {
+        body.setAttribute("data-theme", "light");
+      }
+      if (body.getAttribute("data-theme") === "light") {
+        /* если у блока <div class="theme"> атрибут 'data-theme' строго равен значению 'light'  */
+        body.setAttribute(
+          "data-theme",
+          "dark"
+        ); /* тогда устанавливаем значение 'dark' */
+      } else {
+        /* а иначе */
+        body.setAttribute(
+          "data-theme",
+          "light"
+        ); /* устанавливаем значение 'light' */
+      }
+    },
   },
 };
 </script>
@@ -47,7 +72,7 @@ export default {
 .settings__header__title {
   font-size: 1rem;
   letter-spacing: normal;
-  color: #202124;
+  color: var(--secondary-text-color);
 }
 .settings__content {
   margin-top: 16px;
@@ -86,7 +111,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--sections-bg-color-hover);
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 17px;

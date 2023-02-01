@@ -42,7 +42,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.5);
 }
 .popup__box {
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   max-width: 504px;
   position: relative;
   top: 50%;

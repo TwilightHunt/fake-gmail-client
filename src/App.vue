@@ -36,16 +36,33 @@ export default {
   --items-black-color: #333333;
   --main-text-color: #1f1f1f;
   --items-gray-color: #5f6368;
-  --side-menu-gray: #202124;
+  --secondary-text-color: #202124;
   --titles-color: #212121;
+  --side-items-active: #d3e2fd;
 }
 [data-theme="light"] {
   --main-bg-color: #f6f8fc;
+  --sections-bg-color: #fff;
+  --sections-bg-color-hover: #ebecef;
   --main-text-color: #1f1f1f;
+  --secondary-text-color: #202124;
+  --side-items-hover: #ebecef;
+  --side-items-active: #d3e2fd;
+  --compose-button-color: #c2e7ff;
+  --deep-bg-color: #eef3fc;
+  --titles-color: #212121;
 }
 [data-theme="dark"] {
-  --main-bg-color: #202124;
+  --main-bg-color: #000000;
+  --sections-bg-color: #111;
+  --sections-bg-color-hover: #202020;
   --main-text-color: #fff;
+  --secondary-text-color: #fff;
+  --side-items-hover: #2e2f33;
+  --side-items-active: #5c5c5c;
+  --compose-button-color: #ffffff;
+  --deep-bg-color: #161616;
+  --titles-color: #fff;
 }
 @font-face {
   font-family: "Google Sans";
@@ -71,5 +88,6 @@ body {
   font-size: 0.875rem;
   line-height: 114%;
   background-color: var(--main-bg-color);
+  color: var(--main-text-color);
 }
 </style>

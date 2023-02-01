@@ -298,7 +298,7 @@ export default {
 }
 .calendar {
   text-align: center;
-  color: #202124;
+  color: var(--secondary-text-color);
   line-height: 160%;
 }
 .day {
@@ -314,6 +314,7 @@ export default {
 }
 .tab {
   float: left;
+  color: var(--main-text-color);
 }
 .tab-switch {
   display: none;

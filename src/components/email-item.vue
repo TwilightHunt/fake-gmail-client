@@ -62,7 +62,7 @@ export default {
   display: grid;
   grid-template-columns: 0.5fr 1.5fr;
   min-width: 0px;
-  color: #000;
+  color: var(--main-text-color);
   column-gap: 1.5rem;
   border: solid 1px rgba(0, 0, 0, 0.05);
   padding: 0 20px;

@@ -86,8 +86,9 @@ export default {
   border-radius: 16px;
   font-family: "Google Sans";
   text-transform: capitalize;
-  background-color: #c2e7ff;
+  background-color: var(--compose-button-color);
   margin: 8px;
+  color: #000;
   transition: box-shadow 0.08s linear,
     min-width 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   &:hover {
@@ -106,7 +107,7 @@ export default {
   .side-menu {
     position: absolute;
     z-index: 15;
-    background-color: #fff;
+    background-color: var(--main-bg-color);
     width: 250px;
     bottom: 0;
     top: 64px;

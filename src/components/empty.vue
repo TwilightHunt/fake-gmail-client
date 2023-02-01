@@ -11,7 +11,7 @@ export default {};
   font-weight: 600;
   font-size: 3rem;
   line-height: 120%;
-  color: #202124;
+  color: var(--secondary-text-color);
   opacity: 0.16;
   min-height: calc(100vh - 200px);
   display: flex;
