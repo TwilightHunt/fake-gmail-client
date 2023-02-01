@@ -56,6 +56,7 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
           name="settings"
           class="icon tools__icon"
           color="#5F6368"
+          @click="$emit('toggleSettingVisibility')"
         />
       </v-btn>
       <v-btn

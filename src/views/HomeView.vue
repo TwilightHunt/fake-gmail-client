@@ -7,6 +7,7 @@ import EmailItem from "../components/email-item.vue";
 import Navigation from "../components/navigation.vue";
 import SideMenu from "../components/sideMenu/sideMenu.vue";
 import Empty from "../components/empty.vue";
+import Settings from "../components/settings.vue";
 
 /* --> Views */
 import Auth from "../views/Auth.vue";
@@ -20,6 +21,7 @@ export default {
   data() {
     return {
       isComposeActive: false,
+      isSettingsActive: false,
     };
   },
   computed: {
@@ -67,6 +69,9 @@ export default {
     hideSideMenu() {
       document.querySelector(".side-menu").classList.toggle("_closed");
     },
+    toggleSettingVisibility() {
+      this.isSettingsActive = !this.isSettingsActive;
+    },
   },
   components: {
     Compose,
@@ -77,13 +82,17 @@ export default {
     Empty,
     Auth,
     Mail,
+    Settings,
   },
 };
 </script>
 
 <template>
   <div v-if="isAuth" class="wrapper">
-    <Navigation @hideSideMenu="hideSideMenu" />
+    <Navigation
+      @hideSideMenu="hideSideMenu"
+      @toggleSettingVisibility="toggleSettingVisibility"
+    />
     <div class="content">
       <SideMenu @changeComposeVisibility="changeComposeVisibility" />
       <Mail v-if="$route.params.id" />
@@ -185,6 +194,10 @@ export default {
           <Empty v-else />
         </div>
       </div>
+      <Settings
+        v-if="isSettingsActive"
+        @toggleSettingVisibility="toggleSettingVisibility"
+      />
       <div class="right-side">
         <div class="calendar">
           <div class="day">{{ getCurrentDate().day }}</div>
@@ -217,7 +230,7 @@ export default {
 }
 .mails {
   flex: 1;
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   border-radius: 16px;
   overflow-x: hidden;
 }
@@ -226,7 +239,7 @@ export default {
   padding: 0 5px;
   position: sticky;
   box-shadow: 0 2px 2px rgba(76, 81, 92, 0.123);
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -297,7 +310,7 @@ export default {
 }
 .filter {
   position: relative;
-  background: #fff;
+  background: var(--sections-bg-color);
 }
 .tab {
   float: left;
@@ -312,14 +325,14 @@ export default {
 .tab-label {
   position: relative;
   display: block;
-  background: #fff;
+  background: var(--sections-bg-color);
   font-weight: 600;
   cursor: pointer;
   padding: 1em;
   width: 15vw;
   top: 0;
   &:hover {
-    background-color: #ebecef;
+    background-color: var(--sections-bg-color-hover);
   }
 }
 .tab-switch._checked + .tab-label {
@@ -344,7 +357,7 @@ export default {
   opacity: 0;
   z-index: 1;
   left: 0;
-  background: #fff;
+  background: var(--sections-bg-color);
 }
 .tab-switch._checked + label + .tab-content {
   z-index: 2;

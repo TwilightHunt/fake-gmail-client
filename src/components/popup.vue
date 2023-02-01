@@ -5,8 +5,6 @@
         <div class="popup__head">
           <div class="popup__head__title">Error</div>
           <v-btn
-            h-40
-            w-40
             icon
             elevation="0"
             class="popup__head__button"

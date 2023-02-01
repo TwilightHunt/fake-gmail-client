@@ -29,13 +29,23 @@ export default {
 :root {
   --main-bg-color: #f6f8fc;
   --deep-bg-color: #eef3fc;
+  --sections-bg-color: #fff;
+  --sections-bg-color-hover: #ebecef;
   --items-blue-color: #0b57d0;
   --light-blue-color: #1374e9;
   --items-black-color: #333333;
-  --text-black-color: #1f1f1f;
+  --main-text-color: #1f1f1f;
   --items-gray-color: #5f6368;
   --side-menu-gray: #202124;
   --titles-color: #212121;
+}
+[data-theme="light"] {
+  --main-bg-color: #f6f8fc;
+  --main-text-color: #1f1f1f;
+}
+[data-theme="dark"] {
+  --main-bg-color: #202124;
+  --main-text-color: #fff;
 }
 @font-face {
   font-family: "Google Sans";
