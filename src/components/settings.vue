@@ -8,7 +8,7 @@
         class="settings__header__button"
         @click="$emit('toggleSettingVisibility')"
       >
-        <v-icon color="#5F6368">mdi-window-close</v-icon>
+        <v-icon>mdi-window-close</v-icon>
       </v-btn>
     </div>
     <div class="settings__content">
@@ -18,6 +18,7 @@
             type="checkbox"
             class="settings__theme__checkbox"
             @change="changeTheme"
+            :checked="currentTheme === 'dark'"
           />
           <span class="settings__theme__slider"></span>
         </label>
@@ -30,26 +31,20 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      currentTheme: localStorage.getItem("theme"),
+    };
   },
   methods: {
     changeTheme() {
       const body = document.body;
-      if (!body.getAttribute("data-theme")) {
-        body.setAttribute("data-theme", "light");
-      }
+
       if (body.getAttribute("data-theme") === "light") {
-        /* если у блока <div class="theme"> атрибут 'data-theme' строго равен значению 'light'  */
-        body.setAttribute(
-          "data-theme",
-          "dark"
-        ); /* тогда устанавливаем значение 'dark' */
+        body.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
       } else {
-        /* а иначе */
-        body.setAttribute(
-          "data-theme",
-          "light"
-        ); /* устанавливаем значение 'light' */
+        body.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
       }
     },
   },
@@ -111,7 +106,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--sections-bg-color-hover);
+  background-color: #ccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 17px;
@@ -131,5 +126,7 @@ export default {
 .v-btn.settings__header__button {
   width: 30px;
   height: 30px;
+  background-color: var(--sections-bg-color);
+  color: var(--items-color);
 }
 </style>

@@ -4,15 +4,11 @@
       <div class="title">New message</div>
       <div class="tools">
         <div class="tool">
-          <v-icon color="#202124" class="icon icon-minimize" size="16">
+          <v-icon class="icon icon-minimize" size="16">
             mdi-window-minimize
           </v-icon>
-          <v-icon color="#202124" class="icon icon-expand" size="16">
-            mdi-arrow-expand
-          </v-icon>
-          <v-icon color="#202124" class="icon icon-close" size="16">
-            mdi-close-thick
-          </v-icon>
+          <v-icon class="icon icon-expand" size="16"> mdi-arrow-expand </v-icon>
+          <v-icon class="icon icon-close" size="16"> mdi-close-thick </v-icon>
         </div>
       </div>
     </header>
@@ -142,11 +138,13 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 0 16px;
+
   & input {
     outline: none;
     display: block;
     width: 100%;
     padding: 10px 0;
+    color: var(--main-text-color);
   }
 }
 .header {
@@ -163,6 +161,7 @@ export default {
 .icon {
   width: 16px;
   height: 16px;
+  color: var(--secondary-text-color);
   &:hover {
     background-color: var(--sections-bg-color-hover);
   }
@@ -183,6 +182,7 @@ export default {
   flex: 1 0 100%;
   padding: 10px 0;
   font-size: 0.83rem;
+  color: var(--main-text-color);
 }
 .footer {
   padding: 12px 16px;

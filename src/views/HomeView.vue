@@ -51,6 +51,8 @@ export default {
     },
     checkTabActivity() {
       const tabs = document.querySelectorAll(".tab-switch");
+      const style = getComputedStyle(document.body);
+      const defaultColor = style.getPropertyValue("--items-color");
 
       tabs.forEach((el) => {
         const icon = el.parentNode.querySelector("i");
@@ -61,7 +63,7 @@ export default {
           el.classList.add("_checked");
         } else if (!el.checked && !icon.classList[0].includes("-outline")) {
           const newClass = `${icon.classList[0]}-outline`;
-          this.changeIcon(icon, newClass, "#5F6368");
+          this.changeIcon(icon, newClass, defaultColor);
           el.classList.remove("_checked");
         }
       });
@@ -104,28 +106,23 @@ export default {
                 <input type="checkbox" name="" class="checkbox-input" />
               </v-btn>
               <v-btn elevation="0" class="checkbox-icon-btn">
-                <icon
-                  name="unwrap-arrow"
-                  class="icon _checkbox"
-                  size="10"
-                  color="#5F6368"
-                />
+                <icon name="unwrap-arrow" class="icon _checkbox" size="10" />
               </v-btn>
             </div>
             <v-btn icon elevation="0" class="action-btn">
-              <v-icon color="#5F6368">mdi-reload</v-icon>
+              <v-icon class="icon">mdi-reload</v-icon>
             </v-btn>
             <v-btn icon elevation="0" class="action-btn">
-              <icon name="options" class="icon" color="#5F6368" />
+              <icon name="options" class="icon" />
             </v-btn>
           </div>
           <div class="mails-header__navigation">
             <v-btn elevation="0" class="counter-text"> 1-50 of 9999 </v-btn>
             <v-btn icon elevation="0" class="action-btn _disabled">
-              <v-icon color="#5F6368"> mdi-chevron-left </v-icon>
+              <v-icon class="icon"> mdi-chevron-left </v-icon>
             </v-btn>
             <v-btn icon elevation="0" class="action-btn">
-              <v-icon color="#5F6368">mdi-chevron-right</v-icon>
+              <v-icon class="icon">mdi-chevron-right</v-icon>
             </v-btn>
           </div>
         </div>
@@ -141,7 +138,7 @@ export default {
                 class="tab-switch _checked"
               />
               <label for="tab-1" class="tab-label">
-                <v-icon color="#1374e9" class="tab-icon"> mdi-inbox </v-icon>
+                <v-icon class="tab-icon"> mdi-inbox </v-icon>
                 <span class="tab-title">Primary</span>
               </label>
               <div class="tab-content">
@@ -159,9 +156,7 @@ export default {
                 class="tab-switch"
               />
               <label for="tab-2" class="tab-label">
-                <v-icon color="#5F6368" class="tab-icon">
-                  mdi-label-outline
-                </v-icon>
+                <v-icon class="tab-icon"> mdi-label-outline </v-icon>
                 <span class="tab-title">Promotions</span>
               </label>
               <div class="tab-content">
@@ -176,9 +171,7 @@ export default {
                 class="tab-switch"
               />
               <label for="tab-3" class="tab-label">
-                <v-icon color="#5F6368" class="tab-icon">
-                  mdi-account-multiple-outline
-                </v-icon>
+                <v-icon class="tab-icon"> mdi-account-multiple-outline </v-icon>
                 <span class="tab-title">Socials</span>
               </label>
               <div class="tab-content">
@@ -266,8 +259,9 @@ export default {
   padding: 2px 4px;
 }
 .v-btn {
+  background-color: var(--sections-bg-color);
   &.counter-text {
-    color: var(--items-gray-color);
+    color: var(--items-color);
     font-size: 0.75em;
     font-family: "Google Sans";
   }
@@ -291,6 +285,9 @@ export default {
     width: 35px;
     height: 40px;
   }
+}
+.icon {
+  color: var(--items-color);
 }
 .right-side {
   padding: 10px 2px;
@@ -351,6 +348,7 @@ export default {
 }
 .tab-icon {
   margin-right: 16px;
+  color: var(--items-color);
 }
 .tab-content {
   width: 100%;

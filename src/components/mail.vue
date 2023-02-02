@@ -9,39 +9,39 @@
           style="margin-right: 36px"
           @click="goBack"
         >
-          <Icon name="backwards-arrow" class="icon" color="#333333" />
+          <Icon name="backwards-arrow" class="icon" />
         </v-btn>
         <div class="btn-group">
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="archive" class="icon" color="#333333" />
+            <icon name="archive" class="icon" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="spam" class="icon" color="#333333" />
+            <icon name="spam" class="icon" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="bin" class="icon" color="#333333" />
-          </v-btn>
-        </div>
-        <div class="btn-group">
-          <v-btn icon elevation="0" class="action-btn">
-            <icon name="mail" class="icon" color="#333333" />
-          </v-btn>
-          <v-btn icon elevation="0" class="action-btn">
-            <icon name="clocks" class="icon" color="#333333" />
-          </v-btn>
-          <v-btn icon elevation="0" class="action-btn">
-            <icon name="shedule" class="icon" color="#333333" />
+            <icon name="bin" class="icon" />
           </v-btn>
         </div>
         <div class="btn-group">
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="drive" class="icon" color="#333333" />
+            <icon name="mail" class="icon" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="label" class="icon" color="#333333" />
+            <icon name="clocks" class="icon" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn">
-            <icon name="options" class="icon" color="#333333" />
+            <icon name="shedule" class="icon" />
+          </v-btn>
+        </div>
+        <div class="btn-group">
+          <v-btn icon elevation="0" class="action-btn">
+            <icon name="drive" class="icon" />
+          </v-btn>
+          <v-btn icon elevation="0" class="action-btn">
+            <icon name="label" class="icon" />
+          </v-btn>
+          <v-btn icon elevation="0" class="action-btn">
+            <icon name="options" class="icon" />
           </v-btn>
         </div>
       </div>
@@ -57,14 +57,14 @@
     <div class="mail__title">
       <div>
         <span>{{ mail.topic || "< No topic >" }}</span>
-        <icon name="label" class="icon" color="#333333" />
+        <icon name="label" class="icon" />
       </div>
       <div>
         <v-btn icon elevation="0" class="action-btn">
-          <icon name="print" class="icon" color="#333333" />
+          <icon name="print" class="icon" />
         </v-btn>
         <v-btn icon elevation="0" class="action-btn">
-          <icon name="open-in" class="icon" color="#333333" />
+          <icon name="open-in" class="icon" />
         </v-btn>
       </div>
     </div>
@@ -82,24 +82,19 @@
         <a href="" class="unsubscribe">Unsubscribe</a>
         <div class="receiver">
           <a class="receiver__buttin">to me</a>
-          <icon
-            name="unwrap-arrow"
-            size="10"
-            class="receiver__icon"
-            color="#333333"
-          />
+          <icon name="unwrap-arrow" size="10" class="receiver__icon" />
         </div>
       </div>
       <div class="right-side">
         <span class="date">{{ convertDate(mail.date) }}</span>
         <v-btn icon elevation="0" class="action-btn">
-          <icon name="star" class="icon" color="#333333" />
+          <icon name="star" class="icon" />
         </v-btn>
         <v-btn icon elevation="0" class="action-btn">
-          <icon name="reply" class="icon" color="#333333" />
+          <icon name="reply" class="icon" />
         </v-btn>
         <v-btn icon elevation="0" class="action-btn">
-          <icon name="options" class="icon" color="#333333" />
+          <icon name="options" class="icon" />
         </v-btn>
       </div>
     </div>
@@ -234,13 +229,13 @@ export default {
     font-size: 0.857rem;
     line-height: 116%;
     letter-spacing: 0.02em;
-    color: var(--items-gray-color);
+    color: var(--items-color);
   }
   & .unsubscribe {
     font-size: 0.857rem;
     line-height: 116%;
     letter-spacing: -0.02em;
-    color: var(--items-gray-color);
+    color: var(--items-color);
   }
 }
 .right-side {
@@ -249,7 +244,7 @@ export default {
     line-height: 116%;
     text-align: right;
     letter-spacing: 0.02em;
-    color: #5f6368;
+    color: var(--items-color);
     margin-right: 17px;
   }
   & .action-btn:not(:last-child) {
@@ -259,6 +254,8 @@ export default {
 .action-btn {
   width: 40px;
   height: 40px;
+  background-color: var(--sections-bg-color);
+  color: var(--icons-color);
   &._disabled {
     pointer-events: none;
     opacity: 0.5;

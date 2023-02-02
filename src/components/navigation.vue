@@ -10,62 +10,32 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 
 <template>
   <div class="navigation">
-    <v-btn
-      icon
-      elevation="0"
-      class="mr-4"
-      @click="$emit('hideSideMenu')"
-      color="#f6f8fc"
-    >
-      <v-icon color="#5F6368">mdi-menu</v-icon>
+    <v-btn icon elevation="0" class="mr-4" @click="$emit('hideSideMenu')">
+      <v-icon>mdi-menu</v-icon>
     </v-btn>
     <img class="logo-img" src="../assets/logo.svg" alt="gmail" />
     <div class="search-input">
-      <img
-        class="serach-image"
-        src="../assets/icons/navigation/search.svg"
-        alt="search"
-      />
+      <icon size="15" name="search" class="icon search-icon" />
       <input type="text" placeholder="Search mail" class="search" />
-      <img
-        class="options"
-        src="../assets/icons/navigation/options.svg"
-        alt="search"
-      />
+      <icon size="15" name="options-top" class="icon options-icon" />
       <router-link to="/profile">
         <avatar :src="avatarURL" :size="30" class="search-avatar" />
       </router-link>
     </div>
     <div class="tools">
-      <v-btn
-        icon
-        elevation="0"
-        color="#f6f8fc"
-        class="tools__button action-btn"
-      >
-        <icon size="20" name="help" class="icon tools__icon" color="#5F6368" />
+      <v-btn icon elevation="0" class="tools__button action-btn">
+        <icon size="20" name="help" class="icon tools__icon" />
       </v-btn>
       <v-btn
         icon
         elevation="0"
-        color="#f6f8fc"
         class="tools__button action-btn"
         @click="$emit('toggleSettingVisibility')"
       >
-        <icon
-          size="20"
-          name="settings"
-          class="icon tools__icon"
-          color="#5F6368"
-        />
+        <icon size="20" name="settings" class="icon tools__icon" />
       </v-btn>
-      <v-btn
-        icon
-        elevation="0"
-        color="#f6f8fc"
-        class="tools__button action-btn"
-      >
-        <icon size="16" name="apps" class="icon tools__icon" color="#5F6368" />
+      <v-btn icon elevation="0" class="tools__button action-btn">
+        <icon size="16" name="apps" class="icon tools__icon" />
       </v-btn>
       <router-link to="/profile">
         <avatar :src="avatarURL" :size="40" class="avatar" />
@@ -85,19 +55,21 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   border-radius: 8px;
   width: 37.6vw;
   padding: 15px 57px;
+  color: var(--main-text-color);
 }
 .search-input {
   position: relative;
 }
-.serach-image {
+.search-icon {
   position: absolute;
   top: 31.5%;
   left: 17px;
 }
-.options {
+.options-icon {
   position: absolute;
   top: 31.5%;
   right: 17px;
+  cursor: pointer;
 }
 .tools {
   margin-left: auto;
@@ -115,6 +87,10 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   width: 38px;
   height: 38px;
   margin: 2px;
+}
+.v-btn {
+  background-color: var(--main-bg-color);
+  color: var(--items-color);
 }
 .avatar {
   margin-left: 10px;

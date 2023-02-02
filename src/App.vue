@@ -14,6 +14,7 @@ export default {
       this.$router.push(
         `/uid=${this.user.id}/section=${this.$route.params.section ?? "inbox"}`
       );
+      this.setBodyTheme();
     } else {
       this.$router.push("/auth");
     }
@@ -22,23 +23,23 @@ export default {
     ...mapStores(useUserStore, useMailsStore),
     ...mapState(useUserStore, ["user"]),
   },
+  methods: {
+    setBodyTheme() {
+      const body = document.body;
+      const cachedTheme = localStorage.getItem("theme");
+      const theme = cachedTheme || "light";
+
+      body.setAttribute("data-theme", theme);
+    },
+  },
 };
 </script>
 
 <style>
 :root {
-  --main-bg-color: #f6f8fc;
-  --deep-bg-color: #eef3fc;
-  --sections-bg-color: #fff;
-  --sections-bg-color-hover: #ebecef;
   --items-blue-color: #0b57d0;
   --light-blue-color: #1374e9;
   --items-black-color: #333333;
-  --main-text-color: #1f1f1f;
-  --items-gray-color: #5f6368;
-  --secondary-text-color: #202124;
-  --titles-color: #212121;
-  --side-items-active: #d3e2fd;
 }
 [data-theme="light"] {
   --main-bg-color: #f6f8fc;
@@ -51,6 +52,8 @@ export default {
   --compose-button-color: #c2e7ff;
   --deep-bg-color: #eef3fc;
   --titles-color: #212121;
+  --items-color: #5f6368;
+  --icons-color: #333;
 }
 [data-theme="dark"] {
   --main-bg-color: #000000;
@@ -63,6 +66,8 @@ export default {
   --compose-button-color: #ffffff;
   --deep-bg-color: #161616;
   --titles-color: #fff;
+  --items-color: #fff;
+  --icons-color: #fff;
 }
 @font-face {
   font-family: "Google Sans";
@@ -89,5 +94,6 @@ body {
   line-height: 114%;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
+  transition: all 0.4s ease;
 }
 </style>
