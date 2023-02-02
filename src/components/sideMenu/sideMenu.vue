@@ -28,6 +28,7 @@
       <Item :path="'all'" :name="'mail'" :value="'All mail'" />
       <Item :path="'bin'" :name="'bin'" :value="'Bin'" />
       <Item :path="'more'" :name="'down-arrow'" :value="'More'" />
+      <span class="line-break" />
     </nav>
   </div>
 </template>
@@ -124,5 +125,11 @@ export default {
       }
     }
   }
+}
+.line-break {
+  display: block;
+  height: 2px;
+  width: 100%;
+  color: var(--main-text-color);
 }
 </style>

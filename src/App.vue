@@ -94,6 +94,8 @@ body {
   line-height: 114%;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
+}
+* {
   transition: all 0.4s ease;
 }
 </style>
