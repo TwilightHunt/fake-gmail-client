@@ -6,21 +6,20 @@
           <Icon
             name="backwards-arrow"
             class="mail__header__backwards-arrow backwards-arrow icon"
-            color="#333333"
           />
         </v-btn>
         <div class="mail__header__btn-group btn-group">
           <v-btn icon elevation="0" class="action-btn btn-group__item">
-            <icon name="archive" class="icon archive" color="#333333" />
+            <icon name="archive" class="icon archive" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn btn-group__item">
-            <icon name="bin" class="icon bin" color="#333333" />
+            <icon name="bin" class="icon bin" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn btn-group__item">
-            <icon name="mail" class="icon read" color="#333333" />
+            <icon name="mail" class="icon read" />
           </v-btn>
           <v-btn icon elevation="0" class="action-btn btn-group__item">
-            <icon name="options" class="icon options" color="#333333" />
+            <icon name="options" class="icon options" />
           </v-btn>
         </div>
       </div>
@@ -30,11 +29,7 @@
         <div class="mail-body__topic__text">
           {{ mail.topic || "< No topic >" }}
         </div>
-        <icon
-          name="star"
-          class="icon mail-body__topic__icon star"
-          color="#333333"
-        />
+        <icon name="star" class="icon mail-body__topic__icon star" />
       </div>
       <div class="mail-body__info">
         <avatar
@@ -50,15 +45,15 @@
             <span class="mail-info__date">{{ convertDate(mail.date) }}</span>
           </div>
           <a class="mail-info__receiver-button">to me</a>
-          <v-icon color="#333333" class="mail-info__receiver-icon" size="15">
+          <v-icon class="mail-info__receiver-icon" size="15">
             mdi-chevron-down
           </v-icon>
         </div>
         <v-btn icon elevation="0" class="action-btn mail-body__info__btn">
-          <icon name="reply" class="icon" color="#333333" />
+          <icon name="reply" class="icon" />
         </v-btn>
         <v-btn icon elevation="0" class="action-btn mail-body__info__btn">
-          <icon name="options" class="icon" color="#333333" />
+          <icon name="options" class="icon" />
         </v-btn>
       </div>
       <div class="mail-body__message">
@@ -116,7 +111,7 @@ export default {
   z-index: 20;
   border-radius: 0;
   padding: 5px 20px;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
 }
 .mail__header {
   padding: 10px 0;
@@ -151,7 +146,7 @@ export default {
     content: " Inbox";
     font-size: 0.7rem;
     font-weight: 800;
-    background-color: #edeef0;
+    background-color: var(--sections-bg-color-hover);
     padding: 2px 5px;
     border-radius: 15%;
     display: inline-block;
@@ -162,6 +157,8 @@ export default {
 .v-btn.action-btn {
   width: 30px;
   height: 30px;
+  background-color: var(--main-bg-color);
+  color: var(--icons-color);
 }
 .mail__topic__label {
   display: inline-block;

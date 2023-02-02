@@ -113,6 +113,7 @@ export default {
     top: 64px;
     transform: translateX(0);
     transition: transform 0.3s;
+    padding-right: 16px;
     &._closed {
       transform: translateX(-100%);
     }

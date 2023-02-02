@@ -51,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .email-item_mobile {
   display: flex;
-  color: var(--text-black-color);
+  color: var(--main-text-color);
   padding: 15px 20px;
   word-break: break-all;
 }

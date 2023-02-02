@@ -31,7 +31,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   padding: 0 12px 0 24px;
-  border-radius: 0px 16px 16px 0px;
+  border-radius: 0px 20px 20px 0px;
   &:hover {
     background-color: var(--side-items-hover);
   }

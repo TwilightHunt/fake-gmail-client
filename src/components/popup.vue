@@ -10,7 +10,7 @@
             class="popup__head__button"
             @click="$emit('close')"
           >
-            <v-icon color="#5F6368">mdi-window-close</v-icon>
+            <v-icon>mdi-window-close</v-icon>
           </v-btn>
         </div>
         <div class="popup__message">{{ message }}</div>
@@ -62,6 +62,8 @@ export default {
 .v-btn.popup__head__button {
   width: 40px;
   height: 40px;
+  background-color: var(--sections-bg-color);
+  color: var(--items-color);
 }
 .popup__head__title {
   font-size: 1.375rem;

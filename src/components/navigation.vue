@@ -95,9 +95,8 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
 .avatar {
   margin-left: 10px;
 }
-@media (max-width: 618px) {
-  .tool-btn,
-  .logo-img {
+@media (max-width: 1129px) {
+  .tools__button {
     display: none;
   }
   .navigation {
@@ -113,8 +112,13 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
     width: 100%;
   }
 }
+@media (max-width: 618px) {
+  .tool-btn,
+  .logo-img {
+    display: none;
+  }
+}
 @media (max-width: 486px) {
-  .options,
   .tools {
     display: none;
   }
