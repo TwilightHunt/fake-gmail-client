@@ -91,4 +91,11 @@ export default {
   visibility: visible;
   object-fit: cover;
 }
+.v-btn {
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--main-text-color);
+}
+#image-input {
+  color: #000;
+}
 </style>

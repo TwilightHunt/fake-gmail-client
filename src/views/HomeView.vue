@@ -329,6 +329,7 @@ export default {
   padding: 1em;
   width: 15vw;
   top: 0;
+  transition: none;
   &:hover {
     background-color: var(--sections-bg-color-hover);
   }
