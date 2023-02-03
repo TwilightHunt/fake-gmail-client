@@ -9,7 +9,7 @@
         :path="'inbox'"
         :name="'inbox'"
         :value="'Inbox'"
-        :amount="mailsStore.getSortedReceivedMails.length"
+        :amount="mailsStore.getSortedReceivedMails.length ?? 0"
         class="_bold"
       />
       <Item :path="'starred'" :name="'star'" :value="'Starred'" />
@@ -20,7 +20,7 @@
         :path="'sent'"
         :name="'sent'"
         :value="'Sent'"
-        :amount="mailsStore.getSortedSentMails.length"
+        :amount="mailsStore.getSortedSentMails.length ?? 0"
         class="_bold"
       />
       <Item :path="'drafts'" :name="'draft'" :value="'Drafts'" />

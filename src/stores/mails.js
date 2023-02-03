@@ -39,7 +39,7 @@ export const useMailsStore = defineStore({
 
       return mail;
     },
-    getSortedReceivedMails: (state) => state.receivedMails.reverse(),
-    getSortedSentMails: (state) => state.sentMails.reverse(),
+    getSortedReceivedMails: (state) => state?.receivedMails.reverse(),
+    getSortedSentMails: (state) => state?.sentMails.reverse(),
   },
 });
