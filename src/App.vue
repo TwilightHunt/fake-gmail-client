@@ -8,13 +8,13 @@ import { useUserStore } from "./stores/user";
 import { useMailsStore } from "./stores/mails";
 export default {
   mounted() {
+    this.setBodyTheme();
     if (localStorage.getItem("access_token")) {
       this.userStore.checkAuth();
       this.mailsStore.getMails();
       this.$router.push(
         `/uid=${this.user.id}/section=${this.$route.params.section ?? "inbox"}`
       );
-      this.setBodyTheme();
     } else {
       this.$router.push("/auth");
     }
@@ -54,6 +54,7 @@ export default {
   --titles-color: #212121;
   --items-color: #5f6368;
   --icons-color: #333;
+  --links-color: #04b;
 }
 [data-theme="dark"] {
   --main-bg-color: #000000;
@@ -68,6 +69,7 @@ export default {
   --titles-color: #fff;
   --items-color: #fff;
   --icons-color: #fff;
+  --links-color: #56a8fc;
 }
 @font-face {
   font-family: "Google Sans";
@@ -94,8 +96,5 @@ body {
   line-height: 114%;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
-}
-* {
-  transition: all 0.4s ease;
 }
 </style>

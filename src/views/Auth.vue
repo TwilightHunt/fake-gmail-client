@@ -271,7 +271,7 @@ export default {
 }
 .auth-box {
   border-radius: 10px;
-  background-color: #fff;
+  background-color: var(--sections-bg-color);
   margin: auto;
   text-align: center;
   width: 360px;
@@ -312,9 +312,11 @@ export default {
   padding: 2px 16px;
   height: 54px;
   font-size: 1.714em;
-  border: solid 2px var(--items-gray-color);
+  border: solid 1px var(--items-color);
+  background-color: var(--sections-bg-color);
   border-radius: 10px;
   margin-bottom: 10px;
+  color: var(--main-text-color);
   &._error {
     border-color: #ff0000;
     color: #ff0000;
@@ -329,6 +331,7 @@ export default {
 .auth-box__input-tip {
   margin: 10px 0 30px 0;
   margin-right: auto;
+  color: var(--links-color);
 }
 .auth-box__button {
   text-decoration: none;

@@ -312,6 +312,7 @@ export default {
 .tab {
   float: left;
   color: var(--main-text-color);
+  transition: none;
 }
 .tab-switch {
   display: none;
