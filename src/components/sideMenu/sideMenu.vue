@@ -29,6 +29,12 @@
       <Item :path="'bin'" :name="'bin'" :value="'Bin'" />
       <Item :path="'more'" :name="'down-arrow'" :value="'More'" />
       <span class="line-break" />
+      <Item
+        :name="'settings'"
+        :value="'Settings'"
+        @click="$emit('openSettings')"
+        id="settings"
+      />
     </nav>
   </div>
 </template>
@@ -104,6 +110,9 @@ export default {
 .icon_btn {
   margin-right: 16px;
 }
+#settings {
+  display: none;
+}
 @media (max-width: 1129px) {
   .side-menu {
     position: absolute;
@@ -125,11 +134,16 @@ export default {
       }
     }
   }
-}
-.line-break {
-  display: block;
-  height: 2px;
-  width: 100%;
-  color: var(--main-text-color);
+  #settings {
+    display: flex;
+  }
+  .line-break {
+    display: block;
+    height: 1px;
+    max-width: 100%;
+    background-color: var(--main-text-color);
+    opacity: 0.2;
+    margin: 20px;
+  }
 }
 </style>

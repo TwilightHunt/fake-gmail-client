@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`/uid=${$route.params.uid}/section=${path}`"
+    :to="path ? `/uid=${$route.params.uid}/section=${path}` : $route.path"
     class="link"
     :class="this.$route.params?.section === path ? '_active' : ''"
   >

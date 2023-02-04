@@ -53,11 +53,14 @@ export default {
 
 <style lang="scss" scoped>
 .settings {
-  border-radius: 16px;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   background-color: var(--sections-bg-color);
-  margin-left: 16px;
   padding: 16px;
-  width: 300px;
 }
 .settings__header {
   display: flex;
@@ -74,7 +77,6 @@ export default {
 }
 .settings__theme {
   display: flex;
-  justify-content: space-between;
 }
 .settings__theme__checkbox {
   opacity: 0;
@@ -98,6 +100,9 @@ export default {
   display: inline-block;
   width: 30px;
   height: 17px;
+}
+.settings__theme__title {
+  margin-left: 15px;
 }
 .settings__theme__slider {
   position: absolute;
@@ -128,5 +133,16 @@ export default {
   height: 30px;
   background-color: var(--sections-bg-color);
   color: var(--items-color);
+}
+@media (min-width: 1129px) {
+  .settings {
+    position: static;
+    border-radius: 16px;
+    margin-left: 16px;
+    width: 300px;
+  }
+  .settings__theme {
+    justify-content: space-between;
+  }
 }
 </style>

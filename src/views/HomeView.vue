@@ -53,7 +53,6 @@ export default {
     },
     checkTabActivity() {
       const tabs = document.querySelectorAll(".tab-switch");
-      const style = getComputedStyle(document.body);
 
       tabs.forEach((el) => {
         const icon = el.parentNode.querySelector("i");
@@ -97,7 +96,10 @@ export default {
       @toggleSettingVisibility="toggleSettingVisibility"
     />
     <div class="content">
-      <SideMenu @changeComposeVisibility="changeComposeVisibility" />
+      <SideMenu
+        @changeComposeVisibility="changeComposeVisibility"
+        @openSettings="toggleSettingVisibility"
+      />
       <Mail v-if="$route.params.id" />
       <div v-else class="mails">
         <div class="mails__header">
