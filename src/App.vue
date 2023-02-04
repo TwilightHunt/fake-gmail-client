@@ -11,7 +11,6 @@ export default {
     this.setBodyTheme();
     if (localStorage.getItem("access_token")) {
       this.userStore.checkAuth();
-      this.mailsStore.getMails();
       this.$router.push(
         `/uid=${this.user.id}/section=${this.$route.params.section ?? "inbox"}`
       );

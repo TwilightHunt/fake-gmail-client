@@ -24,6 +24,9 @@ export default {
       isSettingsActive: false,
     };
   },
+  mounted() {
+    this.mailsStore.getMails();
+  },
   computed: {
     ...mapStores(useUserStore, useMailsStore),
     ...mapState(useUserStore, ["isAuth"]),
