@@ -47,26 +47,24 @@ export default {
         weekday: currentDate.toLocaleString("en-us", { weekday: "short" }),
       };
     },
-    changeIcon(icon, newClass, color) {
+    changeIcon(icon, newClass) {
       const oldClass = icon.classList[0];
       icon.classList.replace(oldClass, newClass);
-      icon.style.color = color;
     },
     checkTabActivity() {
       const tabs = document.querySelectorAll(".tab-switch");
       const style = getComputedStyle(document.body);
-      const defaultColor = style.getPropertyValue("--items-color");
 
       tabs.forEach((el) => {
         const icon = el.parentNode.querySelector("i");
 
         if (el.checked) {
           const newClass = icon.classList[0].replace("-outline", "");
-          this.changeIcon(icon, newClass, "#1374e9");
+          this.changeIcon(icon, newClass);
           el.classList.add("_checked");
         } else if (!el.checked && !icon.classList[0].includes("-outline")) {
           const newClass = `${icon.classList[0]}-outline`;
-          this.changeIcon(icon, newClass, defaultColor);
+          this.changeIcon(icon, newClass);
           el.classList.remove("_checked");
         }
       });
@@ -349,6 +347,9 @@ export default {
     width: 90%;
     height: 3px;
     border-radius: 3px;
+  }
+  & .tab-icon {
+    color: var(--light-blue-color);
   }
 }
 .tab-icon {
