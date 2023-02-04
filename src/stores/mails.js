@@ -26,10 +26,13 @@ export const useMailsStore = defineStore({
         "Authorization"
       ] = `Bearer ${localStorage.getItem("access_token")}`;
       MailApi.getMails().then((res) => {
-        console.log(res.data);
         this.sentMails = res.data.sentMails;
         this.receivedMails = res.data.receivedMails;
       });
+    },
+    emptyStore() {
+      this.sentMails = [];
+      this.receivedMails = [];
     },
   },
   getters: {
@@ -39,7 +42,7 @@ export const useMailsStore = defineStore({
 
       return mail;
     },
-    getSortedReceivedMails: (state) => state?.receivedMails.reverse(),
-    getSortedSentMails: (state) => state?.sentMails.reverse(),
+    getSortedReceivedMails: (state) => state.receivedMails.reverse() || [],
+    getSortedSentMails: (state) => state.sentMails.reverse() || [],
   },
 });

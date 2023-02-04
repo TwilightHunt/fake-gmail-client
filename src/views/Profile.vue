@@ -24,6 +24,7 @@
 
 <script>
 import { useUserStore } from "../stores/user";
+import { useMailsStore } from "../stores/mails";
 import { ref } from "vue";
 import avatar from "../components/avatar.vue";
 import { compress } from "image-conversion";
@@ -39,6 +40,7 @@ export default {
   },
   setup() {
     const userStore = useUserStore();
+
     const user = ref(userStore.user);
     return {
       user,
@@ -73,7 +75,9 @@ export default {
     },
     async logout() {
       const userStore = useUserStore();
+      const mailStore = useMailsStore();
       await userStore.logout();
+      mailStore.emptyStore();
       this.$router.push("/auth");
     },
   },

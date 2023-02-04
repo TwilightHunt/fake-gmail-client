@@ -21,7 +21,7 @@ export const useUserStore = defineStore({
         ] = `Bearer ${localStorage.getItem("access_token")}`;
 
         AuthApi.register(data).then((res) => {
-          this.user = res.data;
+          this.user = res.data.user;
           this.isAuth = true;
           this.credentials.accessToken = res.data.token;
           localStorage.setItem("access_token", res.data.token);
