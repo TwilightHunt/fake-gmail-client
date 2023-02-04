@@ -164,7 +164,7 @@ export default {
   background-color: var(--sections-bg-color);
   border-radius: 16px;
   overflow-x: hidden;
-  height: 84vh;
+  height: calc(100vh - 104px);
 }
 .mail__header {
   padding: 14px 16px;

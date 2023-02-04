@@ -117,7 +117,7 @@ export default {
 
 <style lang="scss" scoped>
 .compose {
-  z-index: 10;
+  z-index: 25;
   position: absolute;
   background-color: var(--sections-bg-color);
   width: 32.125vw;
