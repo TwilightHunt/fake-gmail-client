@@ -32,7 +32,7 @@ import { compress } from "image-conversion";
 export default {
   data() {
     return {
-      imagePath: `http://localhost:8080/${this.user.profileImage}`,
+      imagePath: `${import.meta.env.VITE_BASE_URL}/${this.user.profileImage}`,
       tempImage: {},
       imageUrl: "",
       imageIsSelected: false,

@@ -122,6 +122,9 @@ const avatarURL = `${import.meta.env.VITE_BASE_URL}/${user.profileImage}`;
   .tools {
     display: none;
   }
+  .options-icon {
+    visibility: hidden;
+  }
   .search-avatar {
     position: absolute;
     display: block;
